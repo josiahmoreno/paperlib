@@ -1,0 +1,16 @@
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/PaperLib/bin/Debug/net462/PaperLib.dll
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/PaperLib/bin/Debug/net462/PaperLib.pdb
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.csprojAssemblyReference.cache
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.AssemblyInfoInputs.cache
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.AssemblyInfo.cs
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.csproj.CoreCompileInputs.cache
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.dll
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.pdb
+/Users/josiah/UnityProjects/New Unity Project/Assets/Plugins/net462/PaperLib.dll
+/Users/josiah/UnityProjects/New Unity Project/Assets/Plugins/net462/PaperLib.pdb
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.csprojAssemblyReference.cache
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.AssemblyInfoInputs.cache
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.AssemblyInfo.cs
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.csproj.CoreCompileInputs.cache
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.dll
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/PaperLib/obj/Debug/net462/PaperLib.pdb

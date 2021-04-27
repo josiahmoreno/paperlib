@@ -1,0 +1,50 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.6.2": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.6.2": []
+  },
+  "packageFolders": {
+    "/Users/josiah/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/PaperLib/PaperLib.csproj",
+      "projectName": "PaperLib",
+      "projectPath": "/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/PaperLib/PaperLib.csproj",
+      "packagesPath": "/Users/josiah/.nuget/packages/",
+      "outputPath": "/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/PaperLib/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/josiah/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net462"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net462": {
+          "targetAlias": "net462",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net462": {
+        "targetAlias": "net462",
+        "runtimeIdentifierGraphPath": "/Library/Frameworks/Mono.framework/Versions/6.12.0/lib/mono/msbuild/Current/bin/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

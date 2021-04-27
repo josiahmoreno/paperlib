@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net462</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <OutputPath>/Users/josiah/UnityProjects/New Unity Project/Assets/Plugins</OutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="ActionMenu" />
+    </ItemGroup>
+
+</Project>

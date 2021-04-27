@@ -1,0 +1,45 @@
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.deps.json
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.runtimeconfig.json
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.runtimeconfig.dev.json
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.dll
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.pdb
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.csproj.CoreCompileInputs.cache
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.AssemblyInfo.cs
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.dll
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.pdb
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnit3.TestAdapter.dll
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/nunit.engine.netstandard.dll
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/Mono.Cecil.dll
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.csprojAssemblyReference.cache
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.AssemblyInfoInputs.cache
+C:/Users/jmoreno/Documents/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.genruntimeconfig.cache
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnit3.TestAdapter.dll
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/nunit.engine.netstandard.dll
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/Mono.Cecil.dll
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.deps.json
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.runtimeconfig.json
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.runtimeconfig.dev.json
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.dll
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.pdb
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.csprojAssemblyReference.cache
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.AssemblyInfoInputs.cache
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.AssemblyInfo.cs
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.csproj.CoreCompileInputs.cache
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.dll
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.pdb
+/Users/josiah/Documents/C#Projects/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.genruntimeconfig.cache
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnit3.TestAdapter.dll
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/nunit.engine.netstandard.dll
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/Mono.Cecil.dll
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.deps.json
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.runtimeconfig.json
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.runtimeconfig.dev.json
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.dll
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/bin/Debug/netcoreapp1.1/NUnitTestProject1.pdb
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.csprojAssemblyReference.cache
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.AssemblyInfoInputs.cache
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.AssemblyInfo.cs
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.csproj.CoreCompileInputs.cache
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.dll
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.pdb
+/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/NUnitTestProject1/obj/Debug/netcoreapp1.1/NUnitTestProject1.genruntimeconfig.cache

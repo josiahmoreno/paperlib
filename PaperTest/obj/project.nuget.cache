@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "pCgc1dozTv3qfmmfWIOuC2hcPjQfiZxguvCHALZDP+175HDkbiojAItc+aVB2Ko55hK0Afp4HhQsSRohjEaZ7g==",
+  "success": true,
+  "projectFilePath": "/Users/josiah/UnityProjects/New Unity Project/_paper_li/Paper/NUnitTestProject1/PaperTest/PaperTest.csproj",
+  "expectedPackageFiles": [
+    "/Users/josiah/.nuget/packages/microsoft.codecoverage/16.5.0/microsoft.codecoverage.16.5.0.nupkg.sha512",
+    "/Users/josiah/.nuget/packages/microsoft.net.test.sdk/16.5.0/microsoft.net.test.sdk.16.5.0.nupkg.sha512",
+    "/Users/josiah/.nuget/packages/nunit/3.12.0/nunit.3.12.0.nupkg.sha512",
+    "/Users/josiah/.nuget/packages/nunit3testadapter/3.16.1/nunit3testadapter.3.16.1.nupkg.sha512"
+  ],
+  "logs": []
+}
