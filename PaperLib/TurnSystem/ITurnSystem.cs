@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Battle;
 using Enemies;
 using Heroes;
 
@@ -8,6 +9,7 @@ namespace Tests
     public interface ITurnSystem
     {
         object Active { get; }
+        event EventHandler OnSwapped;
 
         Action<object> OnActiveChanged { get; set; }
 

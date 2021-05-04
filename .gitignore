@@ -1,3 +1,13 @@
 .DS_Store
 .idea/
 .vs/
+bin/
+NUnitTestProject1/bin/*
+NUnitTestProject1/obj/Debug/netcoreapp1.1/
+PaperTest/obj/*
+
+NUnitTestProject1/obj/Debug/netcoreapp2.1/
+
+NUnitTestProject1/obj/
+
+PaperTest/obj/

@@ -7,6 +7,7 @@ using Tests;
 
 namespace Battle
 {
+    public delegate void OnSwapped(object sender, EventHandler<object> args);
     internal class DefaultTurnSystem : ITurnSystem
     {
         private object _active;
@@ -30,6 +31,8 @@ namespace Battle
                 //Console.WriteLine($"Turns b - {old} end");
             }
         }
+
+        public event EventHandler OnSwapped;
         public Action<object> OnActiveChanged { get; set; }
 
         public string LastActive
@@ -115,6 +118,8 @@ namespace Battle
                 {
                     Active = Heroes[index - 1];
                 }
+
+                OnSwapped?.Invoke(this,new EventArgs());
             } else
             {
                 throw new Exception("can't swap if there isnt a hero");
