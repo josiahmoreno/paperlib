@@ -110,6 +110,9 @@ namespace Enemies
 
         public virtual List<IEnemyAttack> Sequence { get;  } = null;
 
+        private string _identifier;
+        public string Identifier { get =>Identifier; set => _identifier = value; }
+
         public override string ToString()
         {
             return $"{this.GetType().Name}, hp =  {Health.CurrentValue.ToString()}";

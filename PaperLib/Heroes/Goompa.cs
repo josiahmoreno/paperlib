@@ -1,6 +1,6 @@
 ﻿namespace Heroes
 {
-    public class Goompa: Mario
+    public class Goompa: BaseHero
     {
         public override Heroes? Identity { get; set; } = Heroes.Goompa;
         public Goompa()

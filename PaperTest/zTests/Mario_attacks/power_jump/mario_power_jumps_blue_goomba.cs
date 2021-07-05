@@ -29,7 +29,7 @@ namespace Tests
         public void boots_power_jumps_on_blue_goomba()
         {
             battle.Start();
-            Hero mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario);
+            IMario mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario) as IMario;
             var blueGoomba = battle.Enemies.First();
             var powerJump = mario.Jumps.Find(jump => jump.Identifier == Attacks.Attacks.PowerJump);
             Assert.IsTrue(powerJump != null, "power jump is null");

@@ -1,6 +1,8 @@
-﻿namespace Items
+﻿using System;
+
+namespace Items
 {
-    public interface IInventory
+    public interface IInventory: IEquatable<IInventory>
     {
         IItem[] Items { get; }
     }

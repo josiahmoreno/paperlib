@@ -110,3 +110,10 @@ C:\Users\jmoreno\Documents\Paper\NUnitTestProject1\WpfApp2\obj\Debug\netcoreapp3
 C:\Users\jmoreno\Documents\Paper\NUnitTestProject1\WpfApp2\obj\Debug\netcoreapp3.1\WpfApp2.dll
 C:\Users\jmoreno\Documents\Paper\NUnitTestProject1\WpfApp2\obj\Debug\netcoreapp3.1\WpfApp2.pdb
 C:\Users\jmoreno\Documents\Paper\NUnitTestProject1\WpfApp2\obj\Debug\netcoreapp3.1\WpfApp2.genruntimeconfig.cache
+C:\Users\Josiah\RiderProjects\paperlib\WpfApp2\obj\Debug\netcoreapp3.1\WpfApp2.csproj.AssemblyReference.cache
+C:\Users\Josiah\RiderProjects\paperlib\WpfApp2\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\Josiah\RiderProjects\paperlib\WpfApp2\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\Josiah\RiderProjects\paperlib\WpfApp2\obj\Debug\netcoreapp3.1\WpfApp2_MarkupCompile.cache
+C:\Users\Josiah\RiderProjects\paperlib\WpfApp2\obj\Debug\netcoreapp3.1\WpfApp2_MarkupCompile.lref
+C:\Users\Josiah\RiderProjects\paperlib\WpfApp2\obj\Debug\netcoreapp3.1\WpfApp2.dll
+C:\Users\Josiah\RiderProjects\paperlib\WpfApp2\obj\Debug\netcoreapp3.1\WpfApp2.pdb

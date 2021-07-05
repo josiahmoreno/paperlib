@@ -10,7 +10,7 @@ using MenuData;
 
 namespace Heroes
 {
-    public class Mario : Hero
+    public class Mario : IMario
     {
         private IProtection protection;
 
@@ -101,6 +101,72 @@ namespace Heroes
                 Health.TakeDamage(enemyAttack.Damage);
 
             }
+        }
+
+       
+
+        public override bool Equals(object obj)
+        {
+            if( obj is Mario mario)
+            {
+                if(!EqualityComparer<IProtection>.Default.Equals(protection, mario.protection))
+                {
+                    return false;
+                }
+                if(!EqualityComparer<IInventory>.Default.Equals(iventory, mario.iventory))
+                {
+                    return false;
+                }
+                if(IsUnique != mario.IsUnique)
+                {
+
+                }
+                if(Identity != mario.Identity)
+                {
+
+                }
+                if(!EqualityComparer<List<IJumps>>.Default.Equals(Jumps, mario.Jumps))
+                {
+                    return false;
+                }
+                if(!EqualityComparer<IActionMenuData[]>.Default.Equals(Actions, mario.Actions))
+                {
+                    return false;
+                }
+                if(!EqualityComparer<IHealth>.Default.Equals(Health, mario.Health))
+                {
+                    return false;
+                }
+                return true;
+            } else
+            {
+                return false;
+            }
+                   
+        }
+
+        public bool Equals(Hero y)
+        {
+            return Equals(y as object);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -719687945;
+            hashCode = hashCode * -1521134295 + EqualityComparer<IProtection>.Default.GetHashCode(protection);
+            hashCode = hashCode * -1521134295 + EqualityComparer<IInventory>.Default.GetHashCode(iventory);
+            hashCode = hashCode * -1521134295 + IsUnique.GetHashCode();
+            hashCode = hashCode * -1521134295 + Identity.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<IJumps>>.Default.GetHashCode(Jumps);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Hero[]>.Default.GetHashCode(Partners);
+            hashCode = hashCode * -1521134295 + EqualityComparer<IActionMenuData[]>.Default.GetHashCode(Actions);
+            hashCode = hashCode * -1521134295 + EqualityComparer<IHealth>.Default.GetHashCode(Health);
+            return hashCode;
+        }
+
+        public int GetHashCode(Hero obj)
+        {
+            return GetHashCode();
         }
     }
 }

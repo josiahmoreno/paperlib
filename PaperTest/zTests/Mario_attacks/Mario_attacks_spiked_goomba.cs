@@ -25,8 +25,8 @@ namespace Tests
         public void Mario_jumps_on_spiked_goomba()
         {
             battle.Start();
-            Hero mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario);
-            
+            IMario mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario) as IMario;
+
             mario.JumpOn(battle.Enemies.First());
             var isAlive = battle.Enemies.First().IsAlive();
             Assert.IsTrue(isAlive, $"health = {  battle.Enemies.First().Health.CurrentValue }");
@@ -46,7 +46,7 @@ namespace Tests
         public void Mario_hammers_on_spiked_goomba()
         {
             battle.Start();
-            Hero mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario);
+            IMario mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario) as IMario;
             mario.Hammers(battle.Enemies.First());
           
             Assert.IsTrue(battle.Enemies.First().IsDead);

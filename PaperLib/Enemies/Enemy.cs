@@ -10,6 +10,7 @@ namespace Enemies
 {
     public interface Enemy
     {
+        string Identifier { get; set; }
         IHealth Health { get; set; }
         bool IsFlying { get; }
         bool IsSpiked { get; }

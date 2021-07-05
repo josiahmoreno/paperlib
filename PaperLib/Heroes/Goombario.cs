@@ -3,7 +3,7 @@ using Moves;
 
 namespace Heroes
 {
-    public class Goombario : Mario
+    public class Goombario : BaseHero
     {
         public override Heroes? Identity { get; set; } = Heroes.Goombario;
         public Goombario(Battle.ITextBubbleSystem textBubbleSystem)

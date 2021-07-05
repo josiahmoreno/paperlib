@@ -440,7 +440,66 @@ namespace Battle
             ActiveOption = OptionsListMenu.Active;
         }
 
-       
+        public override bool Equals(object obj)
+        {
+            if (obj is Battle battle)
+            {
+                if (!EqualityComparer<IBattleStateStore>.Default.Equals(BattleStateStore, battle.BattleStateStore)){
+                    Console.WriteLine($"expected: {BattleStateStore.State}, actual: {battle.BattleStateStore.State}");
+                    return false;
+                }
+                if (!Enumerable.SequenceEqual(Heroes, battle.Heroes))
+                {
+                    return false;
+                }
+                if (!EqualityComparer<List<Enemy>>.Default.Equals(Enemies, battle.Enemies))
+                {
+                    return false;
+                }
+                if (!EqualityComparer<List<BattleEvent>>.Default.Equals(events, battle.events))
+                {
+                    return false;
+                }
+                if (!EqualityComparer<IOption>.Default.Equals(ActiveOption, battle.ActiveOption))
+                {
+                    return false;
+                }
+                if (!EqualityComparer<IActionMenuStore>.Default.Equals(actionMenuStore, battle.actionMenuStore))
+                {
+                    return false;
+                }
+                if (ActiveOptionName != battle.ActiveOptionName)
+                {
+                    return false;
+                }
+                if (State == battle.State)
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+            //return obj is Battle battle &&
+            //       EqualityComparer<IBattleStateStore>.Default.Equals(BattleStateStore, battle.BattleStateStore) &&
+            //       EqualityComparer<List<Hero>>.Default.Equals(Heroes, battle.Heroes) &&
+            //       EqualityComparer<List<Enemy>>.Default.Equals(Enemies, battle.Enemies) &&
+            //       EqualityComparer<List<BattleEvent>>.Default.Equals(events, battle.events) &&
+            //       //EqualityComparer<IMarioHealthCounter>.Default.Equals(HealthCounter, battle.HealthCounter) &&
+            //       //EqualityComparer<ITurnSystem>.Default.Equals(TurnSystem, battle.TurnSystem) &&
+            //       //EqualityComparer<IActionMenu>.Default.Equals(ActionMenu, battle.ActionMenu) &&
+            //       //EqualityComparer<IOptionsListMenu>.Default.Equals(OptionsListMenu, battle.OptionsListMenu) &&
+            //       //EqualityComparer<IOptionsListMenu>.Default.Equals(SubOptionsListMenu, battle.SubOptionsListMenu) &&
+            //       // EqualityComparer<IActionCommandCenter>.Default.Equals(ActionCommandCenter, battle.ActionCommandCenter) &&
+            //       //EqualityComparer<ITargetSystem>.Default.Equals(TargetSystem, battle.TargetSystem) &&
+            //       // EqualityComparer<ITextBubbleSystem>.Default.Equals(TextBubbleSystem, battle.TextBubbleSystem) &&
+            //       EqualityComparer<IOption>.Default.Equals(ActiveOption, battle.ActiveOption) &&
+            //       //EqualityComparer<IEnemyAISysytem>.Default.Equals(enemyAISysytem, battle.enemyAISysytem) &&
+            //       EqualityComparer<IActionMenuStore>.Default.Equals(actionMenuStore, battle.actionMenuStore) &&
+            //       ActiveOptionName == battle.ActiveOptionName &&
+
+            //       //EqualityComparer<ITattleStore>.Default.Equals(TattleStore, battle.TattleStore) &&
+            //       State == battle.State;
+        }
     }
 
     public class PartnerOption : IOption

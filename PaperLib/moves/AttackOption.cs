@@ -34,7 +34,7 @@ namespace MenuData
         public void Execute(Battle.Battle battle, object activeHero, Enemy[] targets, Action<IEnumerable<Tuple<Enemy,bool>>> p)
         {
             
-            var mario = activeHero as Mario;
+            var mario = activeHero as Hero;
             var battleAnimationSequnce = battle.WaitForBattleAnimationSequence();
             bool succ = battleAnimationSequnce.Sucessful;
             var results = targets.Select(target => {

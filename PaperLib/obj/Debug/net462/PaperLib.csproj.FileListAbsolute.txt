@@ -1,0 +1,9 @@
+C:\Users\josiah\UnityProjects\New Unity Project\Assets\Plugins\net462\PaperLib.dll
+C:\Users\josiah\UnityProjects\New Unity Project\Assets\Plugins\net462\PaperLib.pdb
+C:\Users\Josiah\RiderProjects\paperlib\PaperLib\obj\Debug\net462\PaperLib.AssemblyInfoInputs.cache
+C:\Users\Josiah\RiderProjects\paperlib\PaperLib\obj\Debug\net462\PaperLib.AssemblyInfo.cs
+C:\Users\Josiah\RiderProjects\paperlib\PaperLib\obj\Debug\net462\PaperLib.csproj.CoreCompileInputs.cache
+C:\Users\Josiah\RiderProjects\paperlib\PaperLib\obj\Debug\net462\PaperLib.dll
+C:\Users\Josiah\RiderProjects\paperlib\PaperLib\obj\Debug\net462\PaperLib.pdb
+C:\Users\Josiah\RiderProjects\paper\Assets\Plugins\net462\PaperLib.dll
+C:\Users\Josiah\RiderProjects\paper\Assets\Plugins\net462\PaperLib.pdb

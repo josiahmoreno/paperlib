@@ -89,6 +89,10 @@ namespace Battle
 
         public void Load(List<Hero> heroes, List<Enemy> enemies)
         {
+            if(heroes.Count() == 0 || enemies.Count == 0)
+            {
+                throw new Exception("Must have enemies AND heroes with turns");
+            }
             this.Heroes = heroes;
             foreach (Hero hero in Heroes)
             {

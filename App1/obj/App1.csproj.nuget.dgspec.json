@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\App1\\App1.csproj": {}
+    "C:\\Users\\Josiah\\RiderProjects\\paperlib\\App1\\App1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\App1\\App1.csproj": {
+    "C:\\Users\\Josiah\\RiderProjects\\paperlib\\App1\\App1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\App1\\App1.csproj",
+        "projectUniqueName": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\App1\\App1.csproj",
         "projectName": "App1",
-        "projectPath": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\App1\\App1.csproj",
-        "packagesPath": "C:\\Users\\jmoreno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\App1\\obj\\",
+        "projectPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\App1\\App1.csproj",
+        "packagesPath": "C:\\Users\\Josiah\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\App1\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet",
+          "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\jmoreno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Josiah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],

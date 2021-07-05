@@ -33,7 +33,7 @@ namespace Tests
         public void Mario_jumps_on_goomba()
         {
             battle.Start();
-            Hero mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario);
+            IMario mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario) as IMario;
             var blueGoomba = battle.Enemies.First();
             mario.JumpOn(blueGoomba);
             var isAlive = blueGoomba.IsAlive();
@@ -47,7 +47,7 @@ namespace Tests
         public void Mario_hammers_on_goomba()
         {
             battle.Start();
-            Hero mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario);
+            IMario mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario) as IMario;
             var blueGoomba = battle.Enemies.First();
             mario.Hammers(blueGoomba);
             var isAlive = blueGoomba.IsAlive();

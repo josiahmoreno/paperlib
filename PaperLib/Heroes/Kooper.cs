@@ -3,7 +3,7 @@ using MenuData;
 
 namespace Heroes
 {
-    public class Kooper: Mario
+    public class Kooper: BaseHero
     {
 
         public override Heroes? Identity { get; set; } = Heroes.Goombario;

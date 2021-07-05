@@ -1,23 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\WpfApp2\\WpfApp2.csproj": {}
+    "C:\\Users\\Josiah\\RiderProjects\\paperlib\\WpfApp2\\WpfApp2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\NUnitTestProject1\\NUnitTestProject1.csproj": {
+    "C:\\Users\\Josiah\\RiderProjects\\paperlib\\NUnitTestProject1\\NUnitTestProject1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\NUnitTestProject1\\NUnitTestProject1.csproj",
+        "projectUniqueName": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\NUnitTestProject1\\NUnitTestProject1.csproj",
         "projectName": "NUnitTestProject1",
-        "projectPath": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\NUnitTestProject1\\NUnitTestProject1.csproj",
-        "packagesPath": "C:\\Users\\jmoreno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\NUnitTestProject1\\obj\\",
+        "projectPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\NUnitTestProject1\\NUnitTestProject1.csproj",
+        "packagesPath": "C:\\Users\\Josiah\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\NUnitTestProject1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\jmoreno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Josiah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -26,7 +28,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,25 +64,26 @@
               "version": "[3.8.0, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\WpfApp2\\WpfApp2.csproj": {
+    "C:\\Users\\Josiah\\RiderProjects\\paperlib\\WpfApp2\\WpfApp2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\WpfApp2\\WpfApp2.csproj",
+        "projectUniqueName": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\WpfApp2\\WpfApp2.csproj",
         "projectName": "WpfApp2",
-        "projectPath": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\WpfApp2\\WpfApp2.csproj",
-        "packagesPath": "C:\\Users\\jmoreno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\WpfApp2\\obj\\",
+        "projectPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\WpfApp2\\WpfApp2.csproj",
+        "packagesPath": "C:\\Users\\Josiah\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\WpfApp2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\jmoreno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Josiah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -96,8 +98,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\NUnitTestProject1\\NUnitTestProject1.csproj": {
-                "projectPath": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\NUnitTestProject1\\NUnitTestProject1.csproj"
+              "C:\\Users\\Josiah\\RiderProjects\\paperlib\\NUnitTestProject1\\NUnitTestProject1.csproj": {
+                "projectPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\NUnitTestProject1\\NUnitTestProject1.csproj"
               }
             }
           }
@@ -129,7 +131,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

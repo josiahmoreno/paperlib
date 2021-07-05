@@ -38,6 +38,12 @@ namespace Battle
         {
             return State == BattleState.ENDED;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is BattleStateStore store &&
+                   State == store.State;
+        }
     }
     
     public class BatleStateChangeEventArgs : EventArgs

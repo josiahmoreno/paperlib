@@ -3091,10 +3091,13 @@
   },
   "libraries": {
     "Microsoft.Net.Native.Compiler/2.0.0": {
-      "sha512": "fY/kWT70qhS8fpKqFzr23FmeWr8UsQJUESDyIeT4U4197ZWWcQ4rQdkHqD4tvb1SMqAuWaFbAkTmNbfEP37UJQ==",
+      "sha512": "LOVoWPYT9iJu7/CKsWt6hm5b2FSCfuJAOD1CUEoa0OEL1xR3THY+NPtRL57jmV6gVZOIiuw7iro60r4MV6sODA==",
       "type": "package",
       "path": "microsoft.net.native.compiler/2.0.0",
+      "hasTools": true,
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "build/Microsoft.Net.Native.Compiler.props",
         "build/Microsoft.Net.Native.Compiler.targets",
         "microsoft.net.native.compiler.2.0.0.nupkg.sha512",
@@ -5065,10 +5068,12 @@
       ]
     },
     "Microsoft.NETCore.UniversalWindowsPlatform/6.0.1": {
-      "sha512": "svqEclOg2g3pmsVen1/sCCsozefwISlHQcB/Y5yxqovG6tx+LIxN0XtGH4XSieLbf5PbzVIXmHoPPrWb0QhuaA==",
+      "sha512": "2RI4q8FfR0S50V4YdZIZtzfyA2Bo4+jJHQXG+TDN7D4mPrFiIswIq8HVeDWS9xZsDwz23z7d/T2qi4rZa60Sig==",
       "type": "package",
       "path": "microsoft.netcore.universalwindowsplatform/6.0.1",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "microsoft.netcore.universalwindowsplatform.6.0.1.nupkg.sha512",
@@ -6593,26 +6598,29 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jmoreno\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\": {}
+    "C:\\Users\\Josiah\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\App1\\App1.csproj",
+      "projectUniqueName": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\App1\\App1.csproj",
       "projectName": "App1",
-      "projectPath": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\App1\\App1.csproj",
-      "packagesPath": "C:\\Users\\jmoreno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jmoreno\\Documents\\Paper\\NUnitTestProject1\\App1\\obj\\",
+      "projectPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\App1\\App1.csproj",
+      "packagesPath": "C:\\Users\\Josiah\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\App1\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet",
+        "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\jmoreno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Josiah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
