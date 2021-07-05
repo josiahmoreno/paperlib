@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace MenuData
 {
-    internal class AttackOption: IOption
+    internal class AttackOption: IOption, IEquatable<IOption>
     {
         public IAttack Attack { get; set; }
         private IActionMenuStore store;
@@ -43,6 +43,12 @@ namespace MenuData
                 return new Tuple<Enemy,bool>(target, attWasSuc);
                 }).ToList();
             p.Invoke(results);
+        }
+
+        public bool Equals(IOption other)
+        {
+            return other != null && other is AttackOption attackOption && attackOption.Attack == Attack &&
+                   Guid == attackOption.Guid && Name == attackOption.Name && TargetType == attackOption.TargetType;
         }
     }
 }

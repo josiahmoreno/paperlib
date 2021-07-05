@@ -29,12 +29,31 @@ namespace Heroes
 
         public override bool Equals(object obj)
         {
-            return obj is BaseHero hero &&
-                   EqualityComparer<IProtection>.Default.Equals(protection, hero.protection) &&
-                   EqualityComparer<IActionMenuData[]>.Default.Equals(Actions, hero.Actions) &&
-                   IsUnique == hero.IsUnique &&
-                   Identity == hero.Identity &&
-                   EqualityComparer<IHealth>.Default.Equals(Health, hero.Health);
+            if (obj is BaseHero baseHero)
+            {
+                if (!EqualityComparer<IProtection>.Default.Equals(protection, baseHero.protection))
+                {
+                    return false;
+                }
+
+                if (IsUnique == baseHero.IsUnique)
+                {
+                    return false;
+                }
+                if (Identity == baseHero.Identity)
+                {
+                    return false;
+                }
+
+                if (!EqualityComparer<IHealth>.Default.Equals(Health, baseHero.Health))
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            return false;
         }
 
         public int GetHashCode(Hero obj)

@@ -6,8 +6,9 @@ using System.Collections.Generic;
 
 namespace MenuData
 {
-    public class Option: IOption
+    public class Option: IOption, IEquatable<IOption>
     {
+   
         public Guid? Guid => null;
         public string Name { get => store.FetchName(this); }
         public TargetType TargetType { get; private set; }
@@ -31,6 +32,12 @@ namespace MenuData
         public virtual void Execute(Battle.Battle battle,object activeHero, Enemy[] targets, System.Action<IEnumerable<Tuple<Enemy, bool>>> p)
         {
             throw new System.NotImplementedException();
+        }
+
+
+        public bool Equals(IOption other)
+        {
+            return  other != null && Guid == other.Guid;
         }
     }
 }

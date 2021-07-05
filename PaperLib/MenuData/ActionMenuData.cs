@@ -1,8 +1,10 @@
-﻿using Battle;
+﻿using System;
+using System.Linq;
+using Battle;
 
 namespace MenuData
 {
-    internal class ActionMenuData: IActionMenuData
+    internal class ActionMenuData: IActionMenuData, IEquatable<IActionMenuData>
     {
         private readonly IActionMenuStore store;
 
@@ -21,5 +23,16 @@ namespace MenuData
         {
             return store.FetchName(item.Identifier);
         }
+
+        public bool Equals(IActionMenuData other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Name == other.Name && Enumerable.SequenceEqual(Options, other.Options);
+        }
+
+       
+
+     
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace Items
 {
     public class Inventory : IInventory
@@ -13,9 +15,9 @@ namespace Items
 
         public bool Equals(IInventory other)
         {
-            throw new System.NotImplementedException();
+            return other != null && EqualityComparer<IItem[]>.Default.Equals(Items, other.Items);
         }
 
-
+      
     }
 }

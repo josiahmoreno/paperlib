@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace MenuData
 {
-    internal class ItemOption: IOption
+    internal class ItemOption: IOption, IEquatable<IOption>
     {
         private IItem item;
 
@@ -33,6 +33,12 @@ namespace MenuData
             Console.WriteLine($"Item Option b -{GetType().Name}");
             p?.Invoke(null);
             Console.WriteLine($"Item Option c -{GetType().Name}");
+        }
+        
+        public bool Equals(IOption other)
+        {
+            return other != null && other is ItemOption itemOption && itemOption.item == item &&
+                   Guid == itemOption.Guid && Name == itemOption.Name && TargetType == itemOption.TargetType;
         }
     }
 }
