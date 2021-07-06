@@ -30,5 +30,10 @@ namespace Attacks
             hero.TakeDamage(this, battleAnimationSequence.Sucessful);
             p?.Invoke();
         }
+
+        public bool Equals(IEnemyAttack other)
+        {
+            return other != null && GetType() == other.GetType() && other is HealAttack he && Damage == other.Damage && heal == he.heal;
+        }
     }
 }

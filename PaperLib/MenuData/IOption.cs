@@ -6,7 +6,7 @@ using Battle;
 
 namespace MenuData
 {
-    public interface IOption
+    public interface IOption: IEquatable<IOption>
     {
         Guid? Guid { get; }
         string Name { get;  }

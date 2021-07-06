@@ -4,7 +4,7 @@ using System;
 
 namespace Attributes
 {
-    public interface IHealth
+    public interface IHealth: IEquatable<IHealth>
     {
         int CurrentValue { get; }
 

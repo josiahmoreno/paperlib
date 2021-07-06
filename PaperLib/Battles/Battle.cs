@@ -93,7 +93,7 @@ namespace Battle
                 {
                     OptionsListMenu.Show(ActionMenu.ActiveAction.Options);
                 }
-                
+
                 /*
                  ActionMenu.Hide();
             OptionsListMenu.Show(ActionMenu.ActiveAction.Options);
@@ -104,12 +104,13 @@ namespace Battle
             TargetSystem.Show(ActiveOption);
                  
                  */
-            } else if (OptionsListMenu.Showing)
+            }
+            else if (OptionsListMenu.Showing)
             {
                 OptionsListMenu.Hide();
                 ActionMenu.Start();
                 HealthCounter.Show();
-                
+
             }
         }
 
@@ -128,21 +129,21 @@ namespace Battle
         }
         public void Start()
         {
-                CheckLoaded();
+            CheckLoaded();
             BattleStateStore.State = BattleState.STARTING;
 
             Enemies.ForEach(enemy => enemy.OnKilled += Enemy_OnKilled);
             events.ForEach(battleEvent =>
             {
-                if (battleEvent.IsAtStart(this)  && battleEvent.IsReady(this))
+                if (battleEvent.IsAtStart(this) && battleEvent.IsReady(this))
                 {
-                   
+
                     battleEvent.Execute(this);
-                    
+
                 }
             });
             bool allCompleted = true;
-            foreach(var ev in events)
+            foreach (var ev in events)
             {
                 if (!ev.Completed)
                 {
@@ -156,8 +157,9 @@ namespace Battle
                 {
                     if (ev.IsAtStart(this) && !ev.Completed)
                     {
-                        
-                        ev.OnCompleted((isCompleted) => {
+
+                        ev.OnCompleted((isCompleted) =>
+                        {
                             OnBattleEventCompleted(isCompleted, () =>
                             {
                                 ActionMenu.Start();
@@ -165,16 +167,17 @@ namespace Battle
                                 BattleStateStore.State = BattleState.STARTED;
                             });
                         });
-                        
+
                     }
                 }
-            } else
+            }
+            else
             {
                 ActionMenu.Start();
                 HealthCounter.Show();
                 BattleStateStore.State = BattleState.STARTED;
             }
-            
+
         }
 
         private void OnBattleEventCompleted(bool isCompleted, Action action)
@@ -196,7 +199,7 @@ namespace Battle
 
         private void Enemy_OnKilled(object sender, EventArgs eventArgs)
         {
-            if (Enemies.TrueForAll(enemy => enemy.IsDead) && !(TextBubbleSystem != null &&  TextBubbleSystem.Showing))
+            if (Enemies.TrueForAll(enemy => enemy.IsDead) && !(TextBubbleSystem != null && TextBubbleSystem.Showing))
             {
                 BattleStateStore.State = BattleState.ENDED;
                 Enemies.ForEach(enemy => enemy.OnKilled -= Enemy_OnKilled);
@@ -209,7 +212,8 @@ namespace Battle
             {
                 SubOptionsListMenu.MoveTargetDown();
                 ActiveOption = SubOptionsListMenu.Active;
-            } else if (OptionsListMenu.Showing)
+            }
+            else if (OptionsListMenu.Showing)
             {
                 OptionsListMenu.MoveTargetDown();
                 ActiveOption = OptionsListMenu.Active;
@@ -219,7 +223,7 @@ namespace Battle
                 ActionMenu.MoveTargetDown();
             }
         }
-        
+
         public void MoveTargetUp()
         {
             if (OptionsListMenu.Showing)
@@ -258,10 +262,10 @@ namespace Battle
         {
             Console.WriteLine($"{GetType().Name} - ExecuteOption - End");
             TurnSystem.End();
-            
+
             while (TurnSystem.Active is Enemy enemy && !enemy.IsDead && enemy.EnemyType != EnemyType.Enviroment)
             {
-                enemyAISysytem.ExecuteEnemyTurn(this,TurnSystem.Active);
+                enemyAISysytem.ExecuteEnemyTurn(this, TurnSystem.Active);
             }
 
             TargetSystem.Cleanup();
@@ -291,30 +295,32 @@ namespace Battle
             if (ActionMenu.Showing)
             {
                 ExecuteFromActionMenu();
-            } else if (SubOptionsListMenu.Showing)
+            }
+            else if (SubOptionsListMenu.Showing)
             {
                 ExecuteFromSubOptionMenu();
-            } 
+            }
             else if (OptionsListMenu.Showing)
             {
                 ExecuteFromOptionMenu();
-            } 
+            }
             else if (TargetSystem.Showing)
             {
                 ConfirmTarget();
-            } else if (TextBubbleSystem.Showing)
+            }
+            else if (TextBubbleSystem.Showing)
             {
                 TextBubbleSystem.Continue();
-            } 
-            
+            }
+
         }
 
         private void ExecuteFromSubOptionMenu()
         {
             ActiveOption = SubOptionsListMenu.Active;
             SubOptionsListMenu.Hide();
-            ActiveOption.Execute(this,TurnSystem.Active,null,null);
-            
+            ActiveOption.Execute(this, TurnSystem.Active, null, null);
+
         }
 
 
@@ -330,7 +336,7 @@ namespace Battle
                 OptionsListMenu.Hide();
                 TargetSystem.Show(ActiveOption);
             }
-           
+
         }
         public void ShowTargeting(IOption active)
         {
@@ -347,29 +353,29 @@ namespace Battle
 
             Console.WriteLine($"ExecuteOption - {move}");
             TargetSystem.Hide();
-            move.Execute(this,activeHero, target, (justDamaged) =>
-            {
-                if (target[0] is EnvironmentTarget environmentTarget)
-                {
-                    environmentTarget.ExecuteEffect(this);
-                }
+            move.Execute(this, activeHero, target, (justDamaged) =>
+             {
+                 if (target[0] is EnvironmentTarget environmentTarget)
+                 {
+                     environmentTarget.ExecuteEffect(this);
+                 }
 
-                HashSet<BattleEvent> battleEventsCompleted = new HashSet<BattleEvent>();
-                events.Where((ev) => ev is BattleEvent);
+                 HashSet<BattleEvent> battleEventsCompleted = new HashSet<BattleEvent>();
+                 events.Where((ev) => ev is BattleEvent);
 
-                events.Where(ev => ev.IsReady(this)).ToList().ForEach(battleEvent => battleEvent.Execute(this));
-                justDamaged?.ToList().ForEach((damaged) =>
-                {
-                   var sequence =  damaged.Item1.PostDamagePhase(damaged.Item2);
+                 events.Where(ev => ev.IsReady(this)).ToList().ForEach(battleEvent => battleEvent.Execute(this));
+                 justDamaged?.ToList().ForEach((damaged) =>
+                 {
+                     var sequence = damaged.Item1.PostDamagePhase(damaged.Item2);
 
-                });
-                if (!TextBubbleSystem.Showing)
-                {
-                    EndTurn();
-                }
-               
+                 });
+                 if (!TextBubbleSystem.Showing)
+                 {
+                     EndTurn();
+                 }
 
-            });
+
+             });
         }
 
         private void ShouldEndTurn()
@@ -408,7 +414,7 @@ namespace Battle
         public ITattleStore TattleStore { get; internal set; } = new TattleStore();
 
         //public IOption[] PartnersOptions { get; set; } = 
-             //{new PartnerOption("Goombario"), new PartnerOption("Koopa")};
+        //{new PartnerOption("Goombario"), new PartnerOption("Koopa")};
 
         public string GetActiveOptionName()
         {
@@ -436,7 +442,7 @@ namespace Battle
             {
                 throw new ArgumentException($"suboptions cannot be empty");
             }
-            this.SubOptionsListMenu.Show(suboptions,0);
+            this.SubOptionsListMenu.Show(suboptions, 0);
             ActiveOption = OptionsListMenu.Active;
         }
 
@@ -444,7 +450,8 @@ namespace Battle
         {
             if (obj is Battle battle)
             {
-                if (!EqualityComparer<IBattleStateStore>.Default.Equals(BattleStateStore, battle.BattleStateStore)){
+                if (!EqualityComparer<IBattleStateStore>.Default.Equals(BattleStateStore, battle.BattleStateStore))
+                {
                     Console.WriteLine($"expected: {BattleStateStore.State}, actual: {battle.BattleStateStore.State}");
                     return false;
                 }
@@ -452,11 +459,11 @@ namespace Battle
                 {
                     return false;
                 }
-                if (!EqualityComparer<List<Enemy>>.Default.Equals(Enemies, battle.Enemies))
+                if (!Enumerable.SequenceEqual(Enemies, battle.Enemies))
                 {
                     return false;
                 }
-                if (!EqualityComparer<List<BattleEvent>>.Default.Equals(events, battle.events))
+                if (!Enumerable.SequenceEqual(events, battle.events))
                 {
                     return false;
                 }
@@ -464,15 +471,15 @@ namespace Battle
                 {
                     return false;
                 }
-                if (!EqualityComparer<IActionMenuStore>.Default.Equals(actionMenuStore, battle.actionMenuStore))
-                {
-                    return false;
-                }
-                if (ActiveOptionName != battle.ActiveOptionName)
-                {
-                    return false;
-                }
-                if (State == battle.State)
+               // if (!EqualityComparer<IActionMenuStore>.Default.Equals(actionMenuStore, battle.actionMenuStore))
+               // {
+                 //   return false;
+               // }
+             //   if (ActiveOptionName != battle.ActiveOptionName)
+               // {
+                 //   return false;
+               // }
+                if (State != battle.State)
                 {
                     return false;
                 }
@@ -505,7 +512,7 @@ namespace Battle
     public class PartnerOption : IOption
     {
         private Hero partner;
-        public PartnerOption(string goombario,Hero partner)
+        public PartnerOption(string goombario, Hero partner)
         {
             this.Name = goombario;
             this.partner = partner;
@@ -514,11 +521,19 @@ namespace Battle
         public Guid? Guid { get; }
         public string Name { get; }
         public TargetType TargetType { get; }
+
+        public bool Equals(IOption other)
+        {
+            return other != null && other is PartnerOption partnerOption
+                && Guid == other.Guid && Name == other.Name &&
+                TargetType == other.TargetType && partner == partnerOption.partner;
+        }
+
         public void Execute(Battle battle, object activeHero, Enemy[] targets, Action<IEnumerable<Tuple<Enemy, bool>>> p)
         {
             battle.Heroes[1] = partner;
             battle.EndTurn();
-            
+
             //throw new NotImplementedException();
         }
     }

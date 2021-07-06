@@ -4,7 +4,7 @@ using Battle;
 
 namespace MenuData
 {
-    internal class ActionMenuData: IActionMenuData, IEquatable<IActionMenuData>
+    internal class ActionMenuData: IActionMenuData
     {
         private readonly IActionMenuStore store;
 
@@ -28,7 +28,8 @@ namespace MenuData
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Name == other.Name && Enumerable.SequenceEqual(Options, other.Options);
+            var result =  Name == other.Name && Enumerable.SequenceEqual(Options, other.Options);
+            return result;
         }
 
        

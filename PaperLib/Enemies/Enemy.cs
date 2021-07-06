@@ -8,7 +8,7 @@ using Tests;
 
 namespace Enemies
 {
-    public interface Enemy
+    public interface Enemy : IEquatable<Enemy>
     {
         string Identifier { get; set; }
         IHealth Health { get; set; }

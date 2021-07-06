@@ -36,11 +36,11 @@ namespace Heroes
                     return false;
                 }
 
-                if (IsUnique == baseHero.IsUnique)
+                if (IsUnique != baseHero.IsUnique)
                 {
                     return false;
                 }
-                if (Identity == baseHero.Identity)
+                if (Identity != baseHero.Identity)
                 {
                     return false;
                 }

@@ -59,6 +59,11 @@ namespace Attributes
         {
             CurrentValue += heal;
         }
+
+        public bool Equals(IHealth other)
+        {
+            return other != null && other is HealthImpl healthImpl && CurrentValue == healthImpl.CurrentValue && Max == healthImpl.Max;
+        }
     }
 
 

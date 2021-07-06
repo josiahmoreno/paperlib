@@ -164,5 +164,25 @@ namespace Enemies
             return null;
             //throw new NotImplementedException();
         }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Goomba);
+        }
+
+        public bool Equals(Enemy othe)
+        {
+            return othe != null && othe is Goomba other && 
+                   EqualityComparer<IAttribute[]>.Default.Equals(Attrs, other.Attrs) &&
+                   EqualityComparer<List<IEnemyAttack>>.Default.Equals(Moves, other.Moves) &&
+                   IsFlying == other.IsFlying &&
+                   EqualityComparer<IHealth>.Default.Equals(Health, other.Health) &&
+                   IsSpiked == other.IsSpiked &&
+                   IsDead == other.IsDead &&
+                   EnemyType == other.EnemyType &&
+                   EqualityComparer<List<IEnemyAttack>>.Default.Equals(Sequence, other.Sequence) &&
+                   _identifier == other._identifier &&
+                   Identifier == other.Identifier;
+        }
     }
 }

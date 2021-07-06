@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2IpXTGa0ZL62SKJZqQeQu2Vg784h2p9CtgaD0uXKaoRzjUOn9tO+qm11ptNXd7hgnWlUAXqDRCOoRfLQnOuj7g==",
+  "dgSpecHash": "zPs1lmBYtp4Fu5liDtLw8rVzQ9bIK9yy+zGsyGcVETqvbYezpqfKDJzxuKvXZ+5XqZgj1G4nO3v7h+bxQSndbg==",
   "success": true,
-  "projectFilePath": "/Users/josiah/Documents/C#Projects/Paper/PaperLib/PaperLib/PaperLib.csproj",
+  "projectFilePath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\PaperLib\\PaperLib.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

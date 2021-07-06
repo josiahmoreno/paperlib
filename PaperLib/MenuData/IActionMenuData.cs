@@ -1,6 +1,8 @@
-﻿namespace MenuData
+﻿using System;
+
+namespace MenuData
 {
-    public interface IActionMenuData
+    public interface IActionMenuData : IEquatable<IActionMenuData>
     {
         string Name { get; }
         IOption[] Options { get; }

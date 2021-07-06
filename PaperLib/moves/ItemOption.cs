@@ -4,10 +4,11 @@ using Battle;
 using Enemies;
 using Items;
 using System.Collections.Generic;
+using Heroes;
 
 namespace MenuData
 {
-    internal class ItemOption: IOption, IEquatable<IOption>
+    internal class ItemOption: BaseOption
     {
         private IItem item;
 
@@ -16,7 +17,7 @@ namespace MenuData
             this.item = item;
         }
 
-        public Guid? Guid { get; }
+        public override Guid? Guid { get; }
         public string Name => item.Name;
 
         public TargetType TargetType => item.TargetType;
@@ -34,11 +35,11 @@ namespace MenuData
             p?.Invoke(null);
             Console.WriteLine($"Item Option c -{GetType().Name}");
         }
-        
+
         public bool Equals(IOption other)
         {
-            return other != null && other is ItemOption itemOption && itemOption.item == item &&
-                   Guid == itemOption.Guid && Name == itemOption.Name && TargetType == itemOption.TargetType;
+            return base.Equals(other) && other is ItemOption itemOption && itemOption.item == item;
+
         }
     }
 }

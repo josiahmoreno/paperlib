@@ -22,5 +22,10 @@ namespace Attributes
         {
             return attribute == spiked; ;
         }
+
+        public bool Equals(IAttribute other)
+        {
+            return attribute == other.attribute;
+        }
     }
 }

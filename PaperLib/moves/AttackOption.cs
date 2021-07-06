@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace MenuData
 {
-    internal class AttackOption: IOption, IEquatable<IOption>
+    internal class AttackOption: BaseOption
     {
         public IAttack Attack { get; set; }
         private IActionMenuStore store;
@@ -26,7 +26,7 @@ namespace MenuData
 
         //public string Name { get; private set; }
 
-        public Guid? Guid { get; }
+        public override Guid? Guid { get; }
         public string Name { get => store.FetchName(this); }
         public TargetType TargetType { get; private set; }
         public HashSet<Attributes.Attributes> PossibleEnemyTypes { get; set; } = null;
@@ -47,8 +47,7 @@ namespace MenuData
 
         public bool Equals(IOption other)
         {
-            return other != null && other is AttackOption attackOption && attackOption.Attack == Attack &&
-                   Guid == attackOption.Guid && Name == attackOption.Name && TargetType == attackOption.TargetType;
+            return base.Equals(other) && other is AttackOption attackOption && attackOption.Attack == Attack;
         }
     }
 }

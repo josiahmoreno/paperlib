@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace Enemies
 {
-    public class JrTroopa : Goomba
+    public class JrTroopa : NewGoomba
     {
 
         public override List<IEnemyAttack> Sequence { get; }= new List<IEnemyAttack>();
 
 
-        public JrTroopa(List<IEnemyAttack> moves) : base(new HealthImpl(5))
+        public JrTroopa(List<IEnemyAttack> moves) : base(new HealthImpl(5), new TattleStore())
         {
             //this.Moves = moves;
             moves.ForEach(move => {

@@ -21,6 +21,32 @@ namespace Heroes
         public TargetType TargetType { get; }
         public IOption[] PartnerOptions { get; }
 
+        public bool Equals(IOption other)
+        {
+            if(other != null && other is ChangeMemberOption changeMemberOption)
+            {
+                if(Guid != other.Guid)
+                {
+                    return false;
+                }
+                if(Name != other.Name)
+                {
+                    return false;
+                }
+                if(TargetType != other.TargetType)
+                {
+                    return false;
+                }
+                if(!Enumerable.SequenceEqual(PartnerOptions,changeMemberOption.PartnerOptions))
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+          
+        }
+
         public void Execute(Battle.Battle battle, object activeHero, Enemy[] targets, Action<IEnumerable<Tuple<Enemy, bool>>> p)
         {
             //battle.Heroes[1] = battle.Pa;

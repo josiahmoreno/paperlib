@@ -168,5 +168,59 @@ namespace Enemies
         {
             return _tattleStore.FetchGameText(this);
         }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as NewGoomba);
+        }
+
+        public bool Equals(Enemy ot)
+        {
+
+            if(ot != null && ot is NewGoomba other)
+            {
+                if (!EqualityComparer<IAttribute[]>.Default.Equals(Attrs, other.Attrs))
+                {
+                    return false;
+                }
+                if(!Enumerable.SequenceEqual(Moves, other.Moves))
+                {
+                    return false;
+                }
+                //if(!EqualityComparer<ITattleStore>.Default.Equals(_tattleStore, other._tattleStore))
+               // {
+                 //   return false;
+               // }
+                if(IsFlying != other.IsFlying)
+                {
+                    return false;
+                }
+                if(!EqualityComparer<IHealth>.Default.Equals(Health, other.Health))
+                {
+                    return false;
+                }
+                if(IsSpiked != other.IsSpiked)
+                {
+                    return false;
+                }
+                if(IsDead != other.IsDead)
+                {
+                    return false;
+                }
+                if(!Enumerable.SequenceEqual(Sequence, other.Sequence))
+                {
+                    return false;
+                }
+                if(_identifier != other._identifier)
+                {
+                    return false;
+                }
+               
+
+                    return true;
+            }
+            return false;
+           
+        }
     }
 }
