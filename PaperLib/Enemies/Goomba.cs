@@ -14,7 +14,7 @@ namespace Enemies
         public IAttribute[] Attrs { get; internal set; }
 
 
-        protected List<IEnemyAttack> Moves = new System.Collections.Generic.List<Battle.IEnemyAttack>();
+        public List<IEnemyAttack> Moves { get; } = new System.Collections.Generic.List<Battle.IEnemyAttack>();
         public Goomba()
         {
             this.Health = new HealthImpl(1);

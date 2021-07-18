@@ -31,7 +31,7 @@ namespace MenuData
         public TargetType TargetType { get; private set; }
         public HashSet<Attributes.Attributes> PossibleEnemyTypes { get; set; } = null;
 
-        public void Execute(Battle.Battle battle, object activeHero, Enemy[] targets, Action<IEnumerable<Tuple<Enemy,bool>>> p)
+        public override void Execute(Battle.Battle battle, object activeHero, Enemy[] targets, Action<IEnumerable<Tuple<Enemy,bool>>> p)
         {
             
             var mario = activeHero as Hero;

@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace Enemies
 {
-    public class JrTroopa : NewGoomba
+    public class JrTroopa : NewBaseEnemy
     {
 
         public override List<IEnemyAttack> Sequence { get; }= new List<IEnemyAttack>();
-
+        public override string Identifier { get; set; } = "JrTroopa";
 
         public JrTroopa(List<IEnemyAttack> moves) : base(new HealthImpl(5), new TattleStore())
         {

@@ -12,12 +12,12 @@ namespace PaperLib.Enemies
             return new NewGoomba(_tattleStore);
         }
 
-        public T FetchEnemy<T>() where  T : NewGoomba
+        public T FetchEnemy<T>() where  T : NewBaseEnemy
         {
             return (T) Activator.CreateInstance(typeof(T), _tattleStore);
         }
         
-        public T FetchEnemy<T>(int currentHealth) where  T : NewGoomba
+        public T FetchEnemy<T>(int currentHealth) where  T : NewBaseEnemy
         {
             return (T) Activator.CreateInstance(typeof(T), currentHealth,_tattleStore);
         }

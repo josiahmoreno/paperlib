@@ -5,7 +5,7 @@ using Enemies;
 
 namespace Enemies
 {
-    public class Fuzzie : NewGoomba
+    public class Fuzzie : NewBaseEnemy
     {
 
 
@@ -14,5 +14,7 @@ namespace Enemies
             this.Moves.Add(new HealAttack(EnemyAttack.FuzzieSuck, 1,1));
            
         }
+
+        public override string Identifier { get ; set ; }
     }
 }

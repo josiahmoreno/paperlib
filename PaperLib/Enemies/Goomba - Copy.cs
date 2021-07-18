@@ -9,25 +9,25 @@ using Tests;
 
 namespace Enemies
 {
-    public class NewGoomba : Enemy
+    public abstract class NewBaseEnemy : Enemy
     {
         public IAttribute[] Attrs { get; internal set; }
 
 
-        protected List<IEnemyAttack> Moves = new System.Collections.Generic.List<Battle.IEnemyAttack>();
-        public NewGoomba(ITattleStore tattleStore)
+        public List<IEnemyAttack> Moves { get; } = new System.Collections.Generic.List<Battle.IEnemyAttack>();
+        public NewBaseEnemy(ITattleStore tattleStore)
         {
             this.Health = new HealthImpl(1);
             this._tattleStore = tattleStore;
         }
 
         private ITattleStore _tattleStore;
-        public NewGoomba(IHealth health,ITattleStore tattleStore)
+        public NewBaseEnemy(IHealth health,ITattleStore tattleStore)
         {
             this.Health = health;
             this._tattleStore = tattleStore;
         }
-        public NewGoomba(ITattleStore tattleStore,params IAttribute[] flying)
+        public NewBaseEnemy(ITattleStore tattleStore,params IAttribute[] flying)
         {
             this.Health = new HealthImpl(1);
             this.Attrs = flying;
@@ -109,9 +109,13 @@ namespace Enemies
         public virtual EnemyType EnemyType => EnemyType.Mob;
 
         public virtual List<IEnemyAttack> Sequence { get;  } = null;
+        
+        
+        public abstract string Identifier { get; set; }
 
-        private string _identifier;
-        public string Identifier { get =>Identifier; set => _identifier = value; }
+        //private string _identifier;
+        //public string Identifier { get => _identifier; set => _identifier = value; }
+
 
         public override string ToString()
         {
@@ -169,58 +173,63 @@ namespace Enemies
             return _tattleStore.FetchGameText(this);
         }
 
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as NewGoomba);
-        }
+      
 
-        public bool Equals(Enemy ot)
-        {
 
-            if(ot != null && ot is NewGoomba other)
-            {
-                if (!EqualityComparer<IAttribute[]>.Default.Equals(Attrs, other.Attrs))
-                {
-                    return false;
-                }
-                if(!Enumerable.SequenceEqual(Moves, other.Moves))
-                {
-                    return false;
-                }
-                //if(!EqualityComparer<ITattleStore>.Default.Equals(_tattleStore, other._tattleStore))
-               // {
-                 //   return false;
-               // }
-                if(IsFlying != other.IsFlying)
-                {
-                    return false;
-                }
-                if(!EqualityComparer<IHealth>.Default.Equals(Health, other.Health))
-                {
-                    return false;
-                }
-                if(IsSpiked != other.IsSpiked)
-                {
-                    return false;
-                }
-                if(IsDead != other.IsDead)
-                {
-                    return false;
-                }
-                if(!Enumerable.SequenceEqual(Sequence, other.Sequence))
-                {
-                    return false;
-                }
-                if(_identifier != other._identifier)
-                {
-                    return false;
-                }
-               
+        public static BaseEnemyEqualityComparer Comparer;
 
-                    return true;
-            }
-            return false;
-           
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    return Equals(obj as NewBaseEnemy);
+        //}
+
+        //public bool Equals(Enemy ot)
+        //{
+
+        //    if(ot != null && ot is NewBaseEnemy other)
+        //    {
+        //        if (!EqualityComparer<IAttribute[]>.Default.Equals(Attrs, other.Attrs))
+        //        {
+        //            return false;
+        //        }
+        //        if(!Enumerable.SequenceEqual(Moves, other.Moves))
+        //        {
+        //            return false;
+        //        }
+        //        //if(!EqualityComparer<ITattleStore>.Default.Equals(_tattleStore, other._tattleStore))
+        //       // {
+        //         //   return false;
+        //       // }
+        //        if(IsFlying != other.IsFlying)
+        //        {
+        //            return false;
+        //        }
+        //        if(!EqualityComparer<IHealth>.Default.Equals(Health, other.Health))
+        //        {
+        //            return false;
+        //        }
+        //        if(IsSpiked != other.IsSpiked)
+        //        {
+        //            return false;
+        //        }
+        //        if(IsDead != other.IsDead)
+        //        {
+        //            return false;
+        //        }
+        //        if(Sequence != null && !Enumerable.SequenceEqual(Sequence, other.Sequence))
+        //        {
+        //            return false;
+        //        }
+        //        if(Identifier != other.Identifier)
+        //        {
+        //            return false;
+        //        }
+
+
+        //            return true;
+        //    }
+        //    return false;
+
+        //}
     }
 }

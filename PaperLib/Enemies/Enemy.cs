@@ -8,8 +8,9 @@ using Tests;
 
 namespace Enemies
 {
-    public interface Enemy : IEquatable<Enemy>
+    public interface Enemy 
     {
+        List<IEnemyAttack> Moves { get; }
         string Identifier { get; set; }
         IHealth Health { get; set; }
         bool IsFlying { get; }

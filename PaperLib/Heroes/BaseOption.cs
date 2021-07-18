@@ -21,7 +21,7 @@ namespace Heroes
                 TargetType == other.TargetType;
         }
 
-        public void Execute(Battle.Battle battle, object activeHero, Enemy[] targets, Action<IEnumerable<Tuple<Enemy, bool>>> p)
+        public virtual void Execute(Battle.Battle battle, object activeHero, Enemy[] targets, Action<IEnumerable<Tuple<Enemy, bool>>> p)
         {
             throw new NotImplementedException();
         }

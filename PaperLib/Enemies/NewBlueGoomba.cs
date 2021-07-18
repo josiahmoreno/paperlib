@@ -3,7 +3,7 @@ using Battle;
 
 namespace Enemies
 {
-    public class NewBlueGoomba: NewGoomba
+    public class NewBlueGoomba: NewBaseEnemy
     {
         public NewBlueGoomba(ITattleStore tattleStore) : base(new HealthImpl(6),tattleStore)
         {
@@ -18,6 +18,7 @@ namespace Enemies
         {
             this.Moves.Add(new RegularAttack(EnemyAttack.GoombaBonk, 1));
         }
-        
+
+        public override string Identifier { get; set; } = "BlueGoomba";
     }
 }
