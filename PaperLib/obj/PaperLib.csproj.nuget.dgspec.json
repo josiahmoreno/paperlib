@@ -1,33 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Josiah\\RiderProjects\\paperlib\\PaperLib\\PaperLib.csproj": {}
+    "/Users/josiah/Documents/C#Projects/Paper/PaperLib/PaperLib/PaperLib.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Josiah\\RiderProjects\\paperlib\\PaperLib\\PaperLib.csproj": {
+    "/Users/josiah/Documents/C#Projects/Paper/PaperLib/PaperLib/PaperLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\PaperLib\\PaperLib.csproj",
+        "projectUniqueName": "/Users/josiah/Documents/C#Projects/Paper/PaperLib/PaperLib/PaperLib.csproj",
         "projectName": "PaperLib",
-        "projectPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\PaperLib\\PaperLib.csproj",
-        "packagesPath": "C:\\Users\\Josiah\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Josiah\\RiderProjects\\paperlib\\PaperLib\\obj\\",
+        "projectPath": "/Users/josiah/Documents/C#Projects/Paper/PaperLib/PaperLib/PaperLib.csproj",
+        "packagesPath": "/Users/josiah/.nuget/packages/",
+        "outputPath": "/Users/josiah/Documents/C#Projects/Paper/PaperLib/PaperLib/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Josiah\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "/Users/josiah/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net462"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,7 +37,7 @@
       "frameworks": {
         "net462": {
           "targetAlias": "net462",
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/Library/Frameworks/Mono.framework/Versions/6.12.0/lib/mono/msbuild/Current/bin/RuntimeIdentifierGraph.json"
         }
       }
     }

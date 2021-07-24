@@ -27,7 +27,7 @@ namespace MenuData
         //public string Name { get; private set; }
 
         public override Guid? Guid { get; }
-        public string Name { get => store.FetchName(this); }
+        public override string Name { get => store.FetchName(this); }
         public TargetType TargetType { get; private set; }
         public HashSet<Attributes.Attributes> PossibleEnemyTypes { get; set; } = null;
 

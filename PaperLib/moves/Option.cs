@@ -6,11 +6,13 @@ using System.Collections.Generic;
 
 namespace MenuData
 {
+    [Obsolete]
     public class Option: IOption, IEquatable<IOption>
     {
    
         public Guid? Guid => null;
-        public string Name { get => store.FetchName(this); }
+        private string _name;
+        public string Name { get => _name ?? store.FetchName(this); }
         public TargetType TargetType { get; private set; }
         public HashSet<Attributes.Attributes> PossibleEnemyTypes { get; set; }
 
@@ -24,7 +26,7 @@ namespace MenuData
         }
         public Option(string v)
         {
-            
+            this._name = v;
         }
 
     

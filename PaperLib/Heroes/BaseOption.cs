@@ -9,7 +9,7 @@ namespace Heroes
     {
       
 
-        public string Name { get; }
+        public virtual string Name { get; }
         public TargetType TargetType { get; }
         public abstract Guid? Guid { get; }
 
