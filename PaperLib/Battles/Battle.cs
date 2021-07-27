@@ -41,6 +41,7 @@ namespace Battle
             TurnSystem = new DefaultTurnSystem();
             enemyAISysytem = new DefaultEnemyAiSystem(this, TurnSystem);
             ActionMenu = new DefaultActionMenu(TurnSystem);
+            TextBubbleSystem = new TextBubbleSystem();
             //TargetSystem = new DefaultTargetSystem(Enemies);
             //HealthCounter = new MarioHealthCounter(Heroes);
             //actionMenuStore ;
@@ -53,6 +54,7 @@ namespace Battle
             this.HealthCounter = new MarioHealthCounter(heroes);
             ActionMenu = new DefaultActionMenu(TurnSystem);
             TargetSystem = new DefaultTargetSystem(Enemies);
+            TextBubbleSystem = new TextBubbleSystem();
             TurnSystem.Load(heroes, enemies);
         }
 
@@ -352,7 +354,7 @@ namespace Battle
             var activeHero = TurnSystem.Active;
 
             Console.WriteLine($"ExecuteOption - {move}");
-            TargetSystem.Hide();
+            TargetSystem.Confirm();
             move.Execute(this, activeHero, target, (justDamaged) =>
              {
                  if (target[0] is EnvironmentTarget environmentTarget)
@@ -369,6 +371,7 @@ namespace Battle
                      var sequence = damaged.Item1.PostDamagePhase(damaged.Item2);
 
                  });
+
                  if (!TextBubbleSystem.Showing)
                  {
                      EndTurn();

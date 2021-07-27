@@ -14,7 +14,7 @@ namespace Enemies
         public IAttribute[] Attrs { get; internal set; }
 
 
-        public List<IEnemyAttack> Moves { get; } = new System.Collections.Generic.List<Battle.IEnemyAttack>();
+        public virtual List<IEnemyAttack> Moves { get; } = new System.Collections.Generic.List<Battle.IEnemyAttack>();
         public NewBaseEnemy(ITattleStore tattleStore)
         {
             this.Health = new HealthImpl(1);
