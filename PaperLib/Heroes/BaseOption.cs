@@ -10,7 +10,7 @@ namespace Heroes
       
 
         public virtual string Name { get; }
-        public TargetType TargetType { get; }
+        public virtual TargetType TargetType { get; }
         public abstract Guid? Guid { get; }
 
         public bool Equals(IOption other)

@@ -173,10 +173,11 @@ namespace Enemies
             return _tattleStore.FetchGameText(this);
         }
 
-      
 
 
-        public static BaseEnemyEqualityComparer Comparer;
+
+
+        public static BaseEnemyEqualityComparer Comparer = new BaseEnemyEqualityComparer();
 
         //public override bool Equals(object obj)
         //{

@@ -20,26 +20,31 @@ namespace MenuData
         public override Guid? Guid { get; }
         public string Name => item.Name;
 
-        public TargetType TargetType => item.TargetType;
+        public override TargetType TargetType => item.TargetType;
         public HashSet<Attributes.Attributes> PossibleEnemyTypes { get; set; }
 
-        public void Execute(Battle.Battle battle, object activeHero, Enemy[] targets, Action<IEnumerable<Tuple<Enemy, bool>>> p)
+        public override void Execute(Battle.Battle battle, object activeHero, Enemy[] targets, Action<IEnumerable<Tuple<Enemy, bool>>> p)
         {
-            Console.WriteLine($"ItemOption a- {GetType().Name}");
+            Console.WriteLine($"ItemOption a- {Name} targets={targets.Length}");
             if (item.Damage != null)
             {
                 
                 targets.ToList().ForEach(target => target.TakeDamage((int) item.Damage));
             }
-            Console.WriteLine($"Item Option b -{GetType().Name}");
+            Console.WriteLine($"Item Option b -{Name}");
             p?.Invoke(null);
-            Console.WriteLine($"Item Option c -{GetType().Name}");
+            Console.WriteLine($"Item Option c -{Name}");
         }
 
         public bool Equals(IOption other)
         {
             return base.Equals(other) && other is ItemOption itemOption && itemOption.item == item;
 
+        }
+
+        public override string ToString()
+        {
+            return $"ItemOption {{{Name} {TargetType}}} ";
         }
     }
 }

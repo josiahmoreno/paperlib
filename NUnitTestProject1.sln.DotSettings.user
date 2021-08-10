@@ -1,15 +1,13 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=93dc6449_002Da480_002D4e1c_002Db5a1_002De7447a4dc6da/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="1" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6c49c6a2_002D45de_002D4d24_002Da5af_002D7dce4a96580a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;And&gt;
-    &lt;Project Location="\Users\josiah\UnityProjects\New Unity Project\_paper_li\Paper\NUnitTestProject1\PaperTest" Presentation="&amp;lt;PaperTest&amp;gt;" /&gt;
-    &lt;TestAncestor&gt;
-      &lt;TestId&gt;NUnit3x::51E0229B-A5A0-41D6-B09E-60087F0FD818::.NETFramework,Version=v4.6.2::Tests.boss_battle_fuzzies.boss_battle_fuzzies_1&lt;/TestId&gt;
-    &lt;/TestAncestor&gt;
+    &lt;Project Location="/Users/josiah/Documents/C#Projects/Paper/PaperLib/PaperTest" Presentation="&amp;lt;PaperTest&amp;gt;" /&gt;
+    &lt;Namespace&gt;Tests&lt;/Namespace&gt;
   &lt;/And&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c6aa5c07_002D3951_002D461b_002D91d7_002Dd7723f937399/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="1" IsActive="True" Name="All tests from &amp;lt;PaperTest&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Project Location="\Users\josiah\UnityProjects\New Unity Project\_paper_li\Paper\NUnitTestProject1\PaperTest" Presentation="&amp;lt;PaperTest&amp;gt;" /&gt;
-&lt;/SessionState&gt;</s:String>
+	
+	
+	
 	
 	
 	

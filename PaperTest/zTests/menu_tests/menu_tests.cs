@@ -2,6 +2,7 @@ using Battle;
 using Heroes;
 using NUnit.Framework;
 using System.Collections.Generic;
+using Enemies;
 
 namespace Tests.menu_tests
 {
@@ -28,7 +29,13 @@ namespace Tests.menu_tests
         [Test]
         public void jr_troopa_equal()
         {
-            Assert.AreEqual(new Enemies.JrTroopa(new List<IEnemyAttack> { new RegularAttack(EnemyAttack.JrTroopaJump, 1) }), new Enemies.JrTroopa(new List<IEnemyAttack> { new RegularAttack(EnemyAttack.JrTroopaJump, 1) }));
+            
+            //
+            var jrTroopaOne = new Enemies.JrTroopa(new List<IEnemyAttack>
+                { new RegularAttack(EnemyAttack.JrTroopaJump, 1) });
+            var jrTroopaTwo = new Enemies.JrTroopa(new List<IEnemyAttack>
+                { new RegularAttack(EnemyAttack.JrTroopaJump, 1) });
+            Assert.IsTrue(NewBaseEnemy.Comparer.Equals(jrTroopaOne, jrTroopaTwo));
         }
     }
 }

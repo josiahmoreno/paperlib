@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Battle
 {
-    public class ActionCommandCenter : IActionCommandCenter
+    public class TestActionCommandCenter : IActionCommandCenter
     {
 
         Stack<bool> stack = new Stack<bool>();

@@ -22,7 +22,7 @@ namespace Battle
         public IOptionsListMenu OptionsListMenu { get; internal set; } = new DefaultOptionsListMenu();
 
         public IOptionsListMenu SubOptionsListMenu { get; private set; } = new DefaultOptionsListMenu();
-        public IActionCommandCenter ActionCommandCenter = new ActionCommandCenter();
+        public IActionCommandCenter ActionCommandCenter = new TestActionCommandCenter();
         internal IBattleAnimationSequence WaitForBattleAnimationSequence()
         {
             return ActionCommandCenter.FetchSequence();
@@ -340,6 +340,7 @@ namespace Battle
         }
         public void ShowTargeting(IOption active)
         {
+            Console.WriteLine($"Battle - ShowTargeting {active}");
             ActiveOption = active;
             OptionsListMenu.Hide();
             TargetSystem.Show(active);
@@ -351,7 +352,8 @@ namespace Battle
             var target = TargetSystem.Actives;
             var activeHero = TurnSystem.Active;
 
-            Console.WriteLine($"ExecuteOption - {move}");
+            Console.WriteLine($"ConfirmTarget - {move} activeCount = {target.Length}");
+           
             TargetSystem.Hide();
             move.Execute(this, activeHero, target, (justDamaged) =>
              {
@@ -359,9 +361,7 @@ namespace Battle
                  {
                      environmentTarget.ExecuteEffect(this);
                  }
-
-                 HashSet<BattleEvent> battleEventsCompleted = new HashSet<BattleEvent>();
-                 events.Where((ev) => ev is BattleEvent);
+                 
 
                  events.Where(ev => ev.IsReady(this)).ToList().ForEach(battleEvent => battleEvent.Execute(this));
                  justDamaged?.ToList().ForEach((damaged) =>

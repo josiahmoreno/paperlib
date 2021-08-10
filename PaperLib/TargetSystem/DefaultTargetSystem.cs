@@ -89,6 +89,7 @@ namespace TargetSystem
 
         public void Show(IOption option)
         {
+            Console.WriteLine($"TargetSystem - Show {option.Name} {option.TargetType}");
             this.currentOption = option;
             if (option.TargetType == TargetType.Single)
             {
@@ -132,6 +133,7 @@ namespace TargetSystem
             else if (option.TargetType == TargetType.All)
             {
                 Actives = enemies.Where(enemy => enemy.EnemyType != EnemyType.Enviroment).ToArray();
+                ;
                 ActiveChanged?.Invoke(Actives);
             }
             Showing = true;

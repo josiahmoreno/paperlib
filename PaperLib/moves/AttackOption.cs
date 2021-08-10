@@ -35,8 +35,8 @@ namespace MenuData
         {
             
             var mario = activeHero as Hero;
-            var battleAnimationSequnce = battle.WaitForBattleAnimationSequence();
-            bool succ = battleAnimationSequnce.Sucessful;
+            var battleAnimationSequence = battle.WaitForBattleAnimationSequence();
+            bool succ = battleAnimationSequence.Sucessful;
             var results = targets.Select(target => {
 
                 bool attWasSuc = mario.Attacks(Attack, target, succ);
