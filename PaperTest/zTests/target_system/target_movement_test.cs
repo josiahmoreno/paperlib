@@ -6,6 +6,7 @@ using Attributes;
 using Enemies;
 using Heroes;
 using NUnit.Framework;
+using PaperLib.Enemies;
 using Battler = Battle.Battle;
 
 namespace Tests.target_system
@@ -18,8 +19,9 @@ namespace Tests.target_system
         public void setup()
         {
             this.Battle = new Battler();
-            Battle.Heroes = new List<Hero>() {new Mario(jumps: new List<IJumps>{new Jump(),new PowerJump()})};
-            Battle.Enemies = new List<Enemy>() {new Goomba(), new Goomba(), new Goomba()};
+            Battle.Heroes = new List<Hero>() {new Mario(jumps: new List<IJumps>{new Jump(),new PowerJump()}), new Goombario()};
+            var fac = new EnemyFactory();
+            Battle.Enemies = new List<Enemy>() {fac.FetchEnemy<NewGoomba>(), fac.FetchEnemy<NewGoomba>(), fac.FetchEnemy<NewGoomba>() };
             Battle.Start();
         }
 
@@ -37,7 +39,25 @@ namespace Tests.target_system
             
         }
         [Test]
-        public void moveRightTargetSystemOutOfBounds()
+        public void actives_null_after_confirm()
+        {
+            Assert.True(Battle.ActionMenu.Showing);
+            Battle.Execute();
+            Assert.True(!Battle.ActionMenu.Showing);
+            Assert.True(Battle.OptionsListMenu.Showing);
+            Battle.Execute();
+            Assert.True(Battle.TargetSystem.Showing);
+            Console.WriteLine($"enemies = {Battle.Enemies.Count}, {Battle.TargetSystem.SelectedIndex}");
+            Assert.IsTrue(Battle.TargetSystem.Actives.Length > 0);
+            Battle.Execute();
+            Assert.True(!Battle.TargetSystem.Showing);
+            Assert.IsNull(Battle.TargetSystem.Actives);
+
+
+        }
+
+        [Test]
+        public void targetNoLongerActiveAfterExecute()
         {
             Assert.True(Battle.ActionMenu.Showing);
             Battle.Execute();
@@ -49,9 +69,8 @@ namespace Tests.target_system
             Battle.TargetSystem.MoveTargetRight();
             Battle.TargetSystem.MoveTargetRight();
             Battle.TargetSystem.MoveTargetRight();
-            
         }
-        
+
         [Test]
         public void HammerTest()
         {

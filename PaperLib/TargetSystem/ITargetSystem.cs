@@ -16,5 +16,6 @@ namespace TargetSystem
         void Hide();
         void MoveTargetRight();
         void Cleanup();
+        void Confirm();
     }
 }

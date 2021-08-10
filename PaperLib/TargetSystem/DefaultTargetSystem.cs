@@ -138,6 +138,12 @@ namespace TargetSystem
             }
             Showing = true;
         }
+
+        public void Confirm()
+        {
+            Hide();
+            ActiveChanged?.Invoke(Actives);
+        }
     }
  
 }

@@ -82,6 +82,7 @@ namespace Battle
                 var nextTurn = Heroes.First((hero) => hero != oldActive && hero.Actions.Length > 0);
                 Console.WriteLine($"-------- next Turn = {nextTurn}");
                 Active = nextTurn;
+                OnSwapped?.Invoke(this, EventArgs.Empty);
             }
             Console.WriteLine($"--------- {oldActive1} ends turn, new active is now {Active} - END");
 
