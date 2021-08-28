@@ -112,7 +112,7 @@ namespace Enemies
 
         public IMovementTarget MovementTarget { get; set; }
 
-        public ISequenceable Sequenceable => throw new NotImplementedException();
+        public ISequenceable Sequenceable { get; set; }
 
         public override string ToString()
         {

@@ -4,11 +4,12 @@ using Enemies;
 using System.Collections.Generic;
 using Attacks;
 using System;
+using Items;
 using PaperLib.Sequence;
 
 namespace Heroes
 {
-    public interface Hero: IEntity, IEquatable<Hero>
+    public interface Hero: IEntity
     {
         MenuData.IActionMenuData[] Actions { get; }
         bool IsUnique { get;  }
@@ -32,5 +33,7 @@ namespace Heroes
 
         void JumpOn(Enemy enemy, IJumps jumps = null);
         void Hammers(Enemy enemy);
+        
+        IInventory iventory { get; set; }
     }
 }

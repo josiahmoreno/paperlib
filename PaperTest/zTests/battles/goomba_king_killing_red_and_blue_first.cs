@@ -7,6 +7,7 @@ using Items;
 using MenuData;
 using NUnit.Framework;
 using PaperLib.Enemies;
+using Tests.battlesequence;
 using Battler = Battle.Battle;
 
 namespace Tests.battles
@@ -30,12 +31,16 @@ namespace Tests.battles
                 new Inventory(new Item("Mushroom"), new Item("Fire Flower", 3, TargetType.All), new Item("Mushroom")),
                 new List<IJumps> { new Attacks.Jump(), new PowerJump() }.ToArray(),
                 new Attacks.Hammer());
+            mario.Sequenceable = new TestSequenceable();
             this.goombario = new Goombario(bubbleSystem);
-            this.GoombaKing = new GoombaKing(new List<IEnemyAttack> { new ScriptAttack(EnemyAttack.GoomnutJump), new GoombaKingKick() });
+            
+            this.GoombaKing = new GoombaKing(new List<IEnemyAttack> { new ScriptAttack(Attacks.Attacks.GoomnutJump), new GoombaKingKick() });
             var goomNutTree = new GoomnutTree();
             this.redGoomba = new RedGoomba(2);
+            redGoomba.Sequenceable = new TestSequenceable();
             var enemyFactory = new EnemyFactory();
             this.blueGoomba = enemyFactory.FetchEnemy<NewBlueGoomba>(2);
+            blueGoomba.Sequenceable = new TestSequenceable();
             var enemies = new List<Enemy>()
             {
                 goomNutTree,

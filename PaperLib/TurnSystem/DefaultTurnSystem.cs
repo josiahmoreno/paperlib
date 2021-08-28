@@ -83,17 +83,28 @@ namespace Battle
                 {
                     Completed.Clear();
                     //_logger?.Log($"{GetType().Name} - yoyo");
-                    //why did i write this
-                    //oldActive = null;
+                    //why did i write this because this will reset the turns to null if the battle is ended
+                    oldActive = null;
                 }
-                var nextTurn = Heroes.First((hero) => hero != oldActive && hero.Actions.Length > 0);
-                _logger?.Log($"{GetType().Name} ------ next turn will be {nextTurn}, oldActive {oldActive}");
-                Active = nextTurn;
-                if ((oldActive is Hero) && (Active is Hero) && oldActive != nextTurn )
+                _logger?.Log($"{GetType().Name} ------ old active {oldActive}");
+                try
                 {
-                    _logger?.Log($"{GetType().Name} --- activating swap = {nextTurn} from {oldActive}");
-                    OnSwapped?.Invoke(this, EventArgs.Empty);
+                    var nextTurn = Heroes.First((hero) => hero != oldActive && hero.Actions.Length > 0);
+                    _logger?.Log($"{GetType().Name} ------ next turn will be {nextTurn}, oldActive {oldActive}");
+                    Active = nextTurn;
+                    if ((oldActive is Hero) && (Active is Hero) && oldActive != nextTurn)
+                    {
+                        _logger?.Log($"{GetType().Name} --- activating swap = {nextTurn} from {oldActive}");
+                        OnSwapped?.Invoke(this, EventArgs.Empty);
+                    }
                 }
+                catch (InvalidOperationException e)
+                {
+                    throw new InvalidOperationException(
+                        $"can't find next hero, old active = {oldActive},\n {string.Join(",", Heroes.Select(h => h.ToString()).ToArray())}");
+                }
+               
+              
             }
             _logger?.Log($"{GetType().Name} ------  ending turn finished {oldActive1} , new active is now {Active} - END");
 

@@ -9,22 +9,25 @@ namespace Tests.battlesequence
         {
         }
 
-        public Tuple<float, float, float> Position { get; private set; } = new Tuple<float, float, float>(0f,0f,0f);
-        public Action OnMoveComplete { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public void Jump()
+        public Tuple<float, float, float> Position { get; set; } = new Tuple<float, float, float>(0f,0f,0f);
+        public IMovementTarget Copy()
         {
-            throw new System.NotImplementedException();
+           return new TestTarget(Position);
         }
 
-        public void MoveTo()
+        public Action OnMoveComplete { get; set ; }
+
+    
+       
+
+        public void Jump(IMovementTarget p, Action p1)
         {
-            throw new System.NotImplementedException();
+            p1();
         }
 
         public void MoveTo(IMovementTarget p)
         {
-            
+            OnMoveComplete();
             //throw new System.NotImplementedException();
         }
 

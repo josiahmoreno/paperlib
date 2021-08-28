@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PaperLib;
+using Tests.battlesequence;
 
 namespace Tests
 {
@@ -98,16 +100,17 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-
+            Battle.Battle.Logger = new TestLogger();
             var bubbleSystem = new TextBubbleSystem();
             Mario = new Mario(
                 new Inventory(),
                 new List<IJumps> { new Attacks.Jump() }.ToArray(),
                 new Attacks.Hammer());
+            Mario.Sequenceable = new TestSequenceable();
             Goompa = new Goompa();
-            var scriptAttack = new ScriptAttack(EnemyAttack.JrTroopaPowerJump);
-            JrTroopa = new JrTroopa(new List<IEnemyAttack> { new RegularAttackWrapper(EnemyAttack.JrTroopaJump, 1) });
-
+            var scriptAttack = new ScriptAttack(Attacks.Attacks.JrTroopaPowerJump);
+            JrTroopa = new JrTroopa(new List<IEnemyAttack> { new RegularAttackWrapper(Attacks.Attacks.JrTroopaJump, 1) });
+            JrTroopa.Sequenceable = new TestSequenceable();
             var enemies = new List<Enemy>()
             {
                 JrTroopa,
@@ -339,5 +342,13 @@ namespace Tests
 
 
 
+    }
+
+    public class TestLogger : ILogger
+    {
+        public void Log(string v)
+        {
+            Console.WriteLine(v);
+        }
     }
 }

@@ -27,7 +27,8 @@ namespace PaperLib.Sequence
         }
         public void Execute(ISequenceable sequenceable, IMovementTarget movementTarget)
         {
-            var mario = sequenceable;
+            
+            var mario = sequenceable ?? throw new NullReferenceException("sequenceable is null");
             var marioStart = mario.CopyPosition();
             Logger?.Log($"{GetType().Name} - starting at {mario.Position} and moving to {movementTarget}, then back to {marioStart}");
             var jumpStart = movementTarget;

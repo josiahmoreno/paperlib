@@ -22,7 +22,7 @@ namespace PaperLib.Sequence
         public void Start(ISequenceable hero)
         {
 
-            Logger?.Log($"{this.ToString()} start");
+            Logger?.Log($"{this} start");
             //Thread.Sleep(2000);
             hero.Jump(movementTarget, ()=>
             {

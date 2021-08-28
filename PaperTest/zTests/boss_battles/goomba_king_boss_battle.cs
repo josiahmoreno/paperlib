@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using Attacks;
 using PaperLib.Enemies;
+using Tests.battlesequence;
 
 namespace Tests
 {
@@ -142,15 +143,19 @@ namespace Tests
                 new Inventory(new Item("Mushroom"), new Item("Fire Flower", 3, TargetType.All), new Item("Mushroom")),
                 new List<IJumps> { new Attacks.Jump(), new PowerJump() }.ToArray(),
                 new Attacks.Hammer());
+            mario.Sequenceable = new TestSequenceable();
             goombario = new Goombario(bubbleSystem);
-            GoombaKing = new GoombaKing(new List<IEnemyAttack> { new ScriptAttack(EnemyAttack.GoomnutJump), new GoombaKingKick() });
+            goombario.Sequenceable = new TestSequenceable();
+            GoombaKing = new GoombaKing(new List<IEnemyAttack> { new ScriptAttack(Attacks.Attacks.GoomnutJump), new GoombaKingKick() });
+            GoombaKing.Sequenceable = new TestSequenceable();
             var goomNutTree = new GoomnutTree();
+            goomNutTree.Sequenceable = new TestSequenceable();
             var enemyFactory = new EnemyFactory();
             var enemies = new List<Enemy>()
             {
                 goomNutTree,
                 GoombaKing,
-                new RedGoomba(2),
+                enemyFactory.FetchEnemy<NewRedGoomba>(2),
                 enemyFactory.FetchEnemy<NewBlueGoomba>(2),
             };
             battle = new Battle.Battle(new List<Hero> { mario, goombario }, enemies, bubbleSystem);
@@ -214,7 +219,7 @@ namespace Tests
             battle.ConfirmTarget();
             int goombaKingHealth = battle.Enemies.First(enemy => enemy == GoombaKing).Health.CurrentValue;
             Assert.IsTrue(condition: goombaKingHealth == 7, message: $"was not GoombaKing, {goombaKingHealth}");
-            Enemy redGoomba = battle.Enemies.First(enemy => enemy is RedGoomba);
+            Enemy redGoomba = battle.Enemies.First(enemy => enemy is NewRedGoomba);
             Assert.IsTrue(condition: redGoomba.IsDead, message: $"redGoomba is not dead, {redGoomba}");
             Enemy blueGoomba = battle.Enemies.First(enemy => enemy is NewBlueGoomba);
             Assert.IsTrue(condition: blueGoomba.IsDead, message: $"blueGoomba is not dead, {blueGoomba}");

@@ -11,3 +11,9 @@ NUnitTestProject1/obj/Debug/netcoreapp2.1/
 NUnitTestProject1/obj/
 
 PaperTest/obj/
+
+PaperLib/obj/Debug/net462/
+
+PaperLib/obj/
+
+NUnitTestProject1.sln.DotSettings.user

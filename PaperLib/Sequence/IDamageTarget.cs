@@ -12,5 +12,7 @@ namespace PaperLib.Sequence
           IEntity hero { get; }
          IEntity target { get; }
         Func<bool> successfulQuicktime { get; }
+
+        bool GetQuicktimeResult();
     }
 }

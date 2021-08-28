@@ -25,7 +25,11 @@ namespace Tests.battlesequence
             this.z = z;
         }
 
-        public Tuple<float, float, float> Position { get; private set; }
+        public Tuple<float, float, float> Position { get; set; } = new Tuple<float, float, float>(0, 0, 0);
+        public IMovementTarget Copy()
+        {
+            return new TestTarget(position: Position);
+        }
 
         public override string ToString()
         {

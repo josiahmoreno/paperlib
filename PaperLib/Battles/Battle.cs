@@ -24,7 +24,7 @@ namespace Battle
         public IOptionsListMenu OptionsListMenu { get; internal set; } = new DefaultOptionsListMenu();
 
         public IOptionsListMenu SubOptionsListMenu { get; private set; } = new DefaultOptionsListMenu();
-        public IActionCommandCenter ActionCommandCenter = new TestActionCommandCenter();
+        public static IActionCommandCenter ActionCommandCenter = new TestActionCommandCenter();
         internal IBattleAnimationSequence WaitForBattleAnimationSequence()
         {
             return ActionCommandCenter.FetchSequence();
@@ -391,8 +391,8 @@ namespace Battle
         internal void EnemyAttack(IEnemyAttack move)
         {
             Logger?.Log($"{GetType().Name} - EnemyAttack - {TurnSystem.Active} -  {move} on {Heroes.First()}");
-            var sequence = ActionCommandCenter.FetchSequence();
-            move.Execute(TurnSystem.Active, Heroes.First(), sequence, () =>
+            //var sequence = ActionCommandCenter.FetchSequence();
+            move.Execute(TurnSystem.Active, Heroes.First(), null, () =>
             {
                 Console.WriteLine($"{GetType().Name} - move Execute ");
                 TurnSystem.End();

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Attacks;
+using Tests.battlesequence;
 
 namespace Tests
 {
@@ -25,16 +26,19 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-
+            Battle.Battle.Logger = new TestLogger();
             var bubbleSystem = new TextBubbleSystem();
             Mario = new Mario(
                 new Inventory(),
                 new List<IJumps> { new Attacks.Jump(), new PowerJump() }.ToArray(),
                 new Attacks.Hammer(), new Attacks.HammerThrow());
+            Mario.Sequenceable = new TestSequenceable();
             Goombario = new Goombario();
+            Goombario.Sequenceable = new TestSequenceable();
             //var scriptAttack = new ScriptAttack(EnemyAttack.JrTroopaPowerJump);
             //JrTroopa = new JrTroopa(new List<IEnemyAttack> { new RegularAttack(EnemyAttack.JrTroopaJump, 1) });
             Magikoopa = new Magikoopa();
+            Magikoopa.Sequenceable = new TestSequenceable();
             var enemies = new List<Enemy>()
             {
                 Magikoopa
@@ -136,8 +140,8 @@ namespace Tests
             //0:32 targeting system is shown with magikoop selected
             Assert.IsTrue(battle.TargetSystem.Actives[0] == Magikoopa, $"{battle.TargetSystem.Actives[0]}");
             //0:33 press a
-            battle.ActionCommandCenter.AddSuccessfulPress();
-            battle.ActionCommandCenter.AddSuccessfulPress();
+            Battle.Battle.ActionCommandCenter.AddSuccessfulPress();
+            Battle.Battle.ActionCommandCenter.AddSuccessfulPress();
             Assert.IsTrue(Magikoopa.IsFlying);
             battle.Execute();
             //0:34 a is prssedat correct time for bonus! Nice
@@ -146,7 +150,7 @@ namespace Tests
             Assert.IsTrue(!Magikoopa.IsFlying);
             //0:36 after damage event added, magikoopa falls off broomstick, she is now on the ground
             //0:38 magikoopa's turn. she shoots mario with a shape blast
-            Assert.IsTrue(Mario.Health.CurrentValue == 8);
+            Assert.AreEqual(8,Mario.Health.CurrentValue);
             //0:40 press a, mario blocks
             //0:40 mario takes 2 damage
             //0:42 menu is shown with jump selected
@@ -173,7 +177,7 @@ namespace Tests
             Assert.IsTrue(battle.TargetSystem.Actives[0] == Magikoopa);
             Assert.IsTrue(Magikoopa.Health.CurrentValue == 4, $"Magi HP = {Magikoopa.Health.CurrentValue}");
             //magikoopa is hit, she is now at 2
-            battle.ActionCommandCenter.AddSuccessfulPress();
+            Battle.Battle.ActionCommandCenter.AddSuccessfulPress();
             battle.Execute();
             Assert.IsTrue(Magikoopa.Health.CurrentValue == 2, $"Magi HP = {Magikoopa.Health.CurrentValue}");
             //0:53 now its goombario's turn
@@ -191,7 +195,7 @@ namespace Tests
             Assert.IsTrue(battle.TargetSystem.Showing);
             Assert.IsTrue(battle.TargetSystem.Actives[0] == Magikoopa);
             //0:55 press a, goombario is about to hit magijoopa
-            battle.ActionCommandCenter.AddSuccessfulPress();
+            Battle.Battle.ActionCommandCenter.AddSuccessfulPress();
             battle.Execute();
             //0:56 press a, a is pressed at the right time of action command so goombario gets second bounce
             //0:59 magikoopa is dead

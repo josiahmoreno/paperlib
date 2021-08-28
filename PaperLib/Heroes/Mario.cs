@@ -26,7 +26,7 @@ namespace Heroes
             this.Jumps = jumps;
         }
 
-        private IInventory iventory;
+        public IInventory iventory { get; set; }
 
         public Mario() : this( new Hero[0], new Inventory(), new IAttack[0],new Hammer())
         {
@@ -115,53 +115,94 @@ namespace Heroes
 
        
 
-        public override bool Equals(object obj)
-        {
-            if( obj is Mario mario)
-            {
-                if(!EqualityComparer<IProtection>.Default.Equals(protection, mario.protection))
-                {
-                    return false;
-                }
-                if(!EqualityComparer<IInventory>.Default.Equals(iventory, mario.iventory))
-                {
-                    return false;
-                }
-                if(IsUnique != mario.IsUnique)
-                {
+        public static MarioEqualityComparer Comparer = new MarioEqualityComparer();
 
-                }
-                if(Identity != mario.Identity)
-                {
-
-                }
-                if(!Enumerable.SequenceEqual(Jumps, mario.Jumps))
-                {
-                    return false;
-                }
-                if(!Enumerable.SequenceEqual(Actions, mario.Actions))
-                {
-                    return false;
-                }
-                if(!EqualityComparer<IHealth>.Default.Equals(Health, mario.Health))
-                {
-                    return false;
-                }
-                return true;
-            } else
-            {
-                return false;
-            }
-                   
-        }
-
-        public bool Equals(Hero y)
-        {
-            return Equals(y as object);
-        }
+       // public override bool Equals(object obj)
+       //  {
+       //      if( obj is Mario mario)
+       //      {
+       //          if(!EqualityComparer<IProtection>.Default.Equals(protection, mario.protection))
+       //          {
+       //              return false;
+       //          }
+       //          if(!EqualityComparer<IInventory>.Default.Equals(iventory, mario.iventory))
+       //          {
+       //              return false;
+       //          }
+       //          if(IsUnique != mario.IsUnique)
+       //          {
+       //
+       //          }
+       //          if(Identity != mario.Identity)
+       //          {
+       //
+       //          }
+       //          if(!Enumerable.SequenceEqual(Jumps, mario.Jumps))
+       //          {
+       //              return false;
+       //          }
+       //          if(!Enumerable.SequenceEqual(Actions, mario.Actions))
+       //          {
+       //              return false;
+       //          }
+       //          if(!EqualityComparer<IHealth>.Default.Equals(Health, mario.Health))
+       //          {
+       //              return false;
+       //          }
+       //          return true;
+       //      } else
+       //      {
+       //          return false;
+       //      }
+       //             
+       //  }
 
      
 
  
+    }
+
+    public class MarioEqualityComparer : IEqualityComparer<IMario>
+    {
+        public bool Equals(IMario x, IMario y)
+        {
+            
+             
+                    // if(!EqualityComparer<IProtection>.Default.Equals(x.protection, y.protection))
+                    // {
+                    //     return false;
+                    // }
+                    if(!EqualityComparer<IInventory>.Default.Equals(x.iventory, y.iventory))
+                    {
+                        return false;
+                    }
+                    if(x.IsUnique != y.IsUnique)
+                    {
+       
+                    }
+                    if(x.Identity != y.Identity)
+                    {
+       
+                    }
+                    if(!Enumerable.SequenceEqual(x.Jumps, y.Jumps))
+                    {
+                        return false;
+                    }
+                    if(!Enumerable.SequenceEqual(x.Actions, y.Actions))
+                    {
+                        return false;
+                    }
+                    if(!EqualityComparer<IHealth>.Default.Equals(x.Health, y.Health))
+                    {
+                        return false;
+                    }
+                    return true;
+                
+        }
+
+        public int GetHashCode(IMario obj)
+        {
+            return obj.GetHashCode();
+        }
     }
 }

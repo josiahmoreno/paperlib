@@ -36,9 +36,9 @@ namespace Battle
             
            
             var damageTarget = new DamageTarget(this, enemy,hero, () => {
-                return false;
+                return Battle.ActionCommandCenter.FetchSequence().Sucessful;
             });
-            var jumpSequence = new JumpSequence(null, damageTarget);
+            var jumpSequence = new JumpSequence(Battle.Logger, damageTarget);
             void onComplete(object sender, EventArgs args)
             {
                 jumpSequence.OnComplete -= onComplete;
