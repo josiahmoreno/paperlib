@@ -7,18 +7,20 @@ namespace Attacks
 {
     internal class HealAttack : IEnemyAttack
     {
-        private EnemyAttack fuzzieSuck;
+        private Attacks fuzzieSuck;
         private int damage;
         private int heal;
 
-        public HealAttack(EnemyAttack fuzzieSuck, int v1, int v2)
+        public HealAttack(Attacks fuzzieSuck, int v1, int v2)
         {
             this.fuzzieSuck = fuzzieSuck;
             this.damage = v1;
             this.heal = v2;
         }
 
-        public int Damage => damage;
+        public int Power => damage;
+
+        public Attacks Identifier => Attacks.HealAttack;
 
         public void Execute(object active, Hero hero, IBattleAnimationSequence battleAnimationSequence, Action p)
         {
@@ -27,13 +29,23 @@ namespace Attacks
             {
                 (active as Enemy).Health.Heal(heal);
             }
-            hero.TakeDamage(this, battleAnimationSequence.Sucessful);
+            hero.TakeDamage(this,null ,battleAnimationSequence.Sucessful);
             p?.Invoke();
         }
 
         public bool Equals(IEnemyAttack other)
         {
-            return other != null && GetType() == other.GetType() && other is HealAttack he && Damage == other.Damage && heal == he.heal;
+            return other != null && GetType() == other.GetType() && other is HealAttack he && Power == other.Power && heal == he.heal;
+        }
+
+        public bool IsGroundOnly()
+        {
+           return false;
+        }
+
+        public bool CanHitFlying()
+        {
+           return true;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Attributes;
 using Battle;
 using Heroes;
+using PaperLib.Sequence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Enemies
     public abstract class NewBaseEnemy : Enemy
     {
         public IAttribute[] Attrs { get; internal set; }
-
+        public ISequenceable Sequenceable { get; set; }
 
         public virtual List<IEnemyAttack> Moves { get; } = new System.Collections.Generic.List<Battle.IEnemyAttack>();
         public NewBaseEnemy(ITattleStore tattleStore)
@@ -58,7 +59,7 @@ namespace Enemies
 
 
 
-        public bool TakeDamage(IProtection protection,IAttack attack, bool ActionCommandSuccessful)
+        public bool TakeDamage(IAttack attack, IProtection protection, bool ActionCommandSuccessful)
         {
             //can be attacked by the 'hammer' (attack)
             bool successful = false;
@@ -173,9 +174,10 @@ namespace Enemies
             return _tattleStore.FetchGameText(this);
         }
 
-
-
-
+        public bool Attack(IAttack attack, IEntity target, bool succ)
+        {
+            return target.TakeDamage(attack, null, succ);
+        }
 
         public static BaseEnemyEqualityComparer Comparer = new BaseEnemyEqualityComparer();
 

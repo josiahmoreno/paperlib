@@ -15,7 +15,7 @@
             return true ;
         }
 
-        public bool IsJump()
+        public bool CanHitFlying()
         {
            return false;
         }

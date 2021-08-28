@@ -1,9 +1,9 @@
-﻿using Attacks;
+﻿using Attributes;
 using Battle;
 using Enemies;
 using System.Collections.Generic;
 
-namespace PaperLib.Enemies
+namespace Enemies
 {
     public class NewGoomba : NewBaseEnemy
     {
@@ -13,7 +13,8 @@ namespace PaperLib.Enemies
 
         public override List<IEnemyAttack> Moves => new List<IEnemyAttack>()
         {
-            new RegularAttack(EnemyAttack.GoombaBonk,1)
+          
+            new RegularAttackWrapper(Attacks.Attacks.GoombaBonk ,1)
         };
 
         public NewGoomba(ITattleStore store): base(store)

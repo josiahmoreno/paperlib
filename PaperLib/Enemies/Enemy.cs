@@ -2,13 +2,14 @@
 using Attributes;
 using Battle;
 using Heroes;
+using PaperLib.Sequence;
 using System;
 using System.Collections.Generic;
 using Tests;
 
 namespace Enemies
 {
-    public interface Enemy 
+    public interface Enemy: IEntity 
     {
         List<IEnemyAttack> Moves { get; }
         string Identifier { get; set; }
@@ -18,7 +19,7 @@ namespace Enemies
         IAttribute[] Attrs { get; }
 
         EnemyType EnemyType { get; }
-        bool TakeDamage(IProtection protection,IAttack hammer,bool ActionCommandSuccessful);
+        //bool TakeDamage(IProtection protection,IAttack hammer,bool ActionCommandSuccessful);
 
         void Kill();
 
@@ -33,6 +34,7 @@ namespace Enemies
         bool TakeDamage(int damage);
 
         List<IEnemyAttack> Sequence { get; }
+  
 
         object PostDamagePhase(bool item2);
 

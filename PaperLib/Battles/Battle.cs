@@ -6,18 +6,20 @@ using Tests;
 using System.Linq;
 using MenuData;
 using TargetSystem;
+using PaperLib;
 
 namespace Battle
 {
     public class Battle
     {
+        public static ILogger Logger;
         public IBattleStateStore BattleStateStore = new BattleStateStore();
         public List<Hero> Heroes = new List<Hero>();
         public List<Enemy> Enemies = new List<Enemy>();
         public List<BattleEvent> events = new List<BattleEvent>();
 
         public IMarioHealthCounter HealthCounter;
-        public ITurnSystem TurnSystem { get; internal set; } = new DefaultTurnSystem();
+        public ITurnSystem TurnSystem { get; internal set; } = new DefaultTurnSystem(Logger);
         public IActionMenu ActionMenu { get; internal set; }
         public IOptionsListMenu OptionsListMenu { get; internal set; } = new DefaultOptionsListMenu();
 
@@ -38,7 +40,7 @@ namespace Battle
         private IActionMenuStore actionMenuStore = new DefaultActionMenuStore();
         public Battle()
         {
-            TurnSystem = new DefaultTurnSystem();
+            TurnSystem = new DefaultTurnSystem(Logger);
             enemyAISysytem = new DefaultEnemyAiSystem(this, TurnSystem);
             ActionMenu = new DefaultActionMenu(TurnSystem);
             TextBubbleSystem = new TextBubbleSystem();
@@ -50,7 +52,7 @@ namespace Battle
         {
             Heroes = heroes;
             Enemies = enemies;
-            TurnSystem = new DefaultTurnSystem();
+            TurnSystem = new DefaultTurnSystem(Logger);
             this.HealthCounter = new MarioHealthCounter(heroes);
             ActionMenu = new DefaultActionMenu(TurnSystem);
             TargetSystem = new DefaultTargetSystem(Enemies);
@@ -62,7 +64,7 @@ namespace Battle
         {
             Heroes = heroes;
             Enemies = enemies;
-            TurnSystem = new DefaultTurnSystem();
+            TurnSystem = new DefaultTurnSystem(Logger);
             enemyAISysytem = new DefaultEnemyAiSystem(this, TurnSystem);
             this.HealthCounter = new MarioHealthCounter(heroes);
             ActionMenu = new DefaultActionMenu(TurnSystem);
@@ -265,11 +267,8 @@ namespace Battle
             Console.WriteLine($"{GetType().Name} - ExecuteOption - End");
             TurnSystem.End();
 
-            while (TurnSystem.Active is Enemy enemy && !enemy.IsDead && enemy.EnemyType != EnemyType.Enviroment)
-            {
-                enemyAISysytem.ExecuteEnemyTurn(this, TurnSystem.Active);
-            }
-
+            //while (TurnSystem.Active is Enemy enemy && !enemy.IsDead && enemy.EnemyType != EnemyType.Enviroment)
+            //{
             TargetSystem.Cleanup();
             if (Enemies.TrueForAll(enemy => enemy.IsDead))
             {
@@ -278,6 +277,10 @@ namespace Battle
             }
             ActionMenu.Process();
             HealthCounter.Show();
+            enemyAISysytem.ExecuteEnemyTurn(this, TurnSystem.Active);
+            //}
+
+            
         }
 
         public void End()
@@ -387,15 +390,32 @@ namespace Battle
 
         internal void EnemyAttack(IEnemyAttack move)
         {
-            Console.WriteLine($"{GetType().Name} - EnemyAttack - {TurnSystem.Active} -  {move} on {Heroes.First()}");
+            Logger?.Log($"{GetType().Name} - EnemyAttack - {TurnSystem.Active} -  {move} on {Heroes.First()}");
             var sequence = ActionCommandCenter.FetchSequence();
             move.Execute(TurnSystem.Active, Heroes.First(), sequence, () =>
             {
                 Console.WriteLine($"{GetType().Name} - move Execute ");
                 TurnSystem.End();
                 TurnSystem.ExcuteTurn();
+                ExecuteNextTurn();
                 Console.WriteLine($"EnemyAttack - End");
             });
+        }
+
+        private void ExecuteNextTurn()
+        {
+            if(TurnSystem.Active is Enemy)
+            {
+                enemyAISysytem.ExecuteEnemyTurn(this, TurnSystem.Active);
+            }
+            TargetSystem.Cleanup();
+            if (Enemies.TrueForAll(enemy => enemy.IsDead))
+            {
+                BattleStateStore.State = BattleState.ENDED;
+                Enemies.ForEach(enemy => enemy.OnKilled -= Enemy_OnKilled);
+            }
+            ActionMenu.Process();
+            HealthCounter.Show();
         }
 
         public void ExecuteFromActionMenu()

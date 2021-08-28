@@ -9,33 +9,35 @@ namespace Battle
         private object goomnutJump;
 
         
-        public ScriptAttack(EnemyAttack goomnutJump, int damage = 2)
+        public ScriptAttack(Attacks.Attacks goomnutJump, int damage = 2)
         {
             this.goomnutJump = goomnutJump;
         }
 
-        public int Damage => 2;
+        public int Power => 2;
+
+        public Attacks.Attacks Identifier => throw new NotImplementedException();
+
+        public bool CanHitFlying()
+        {
+            throw new NotImplementedException();
+        }
 
         public bool Equals(IEnemyAttack other)
         {
-            return other != null && GetType() == other.GetType() && Damage == other.Damage;
+            return other != null && GetType() == other.GetType() && Power == other.Power;
         }
         public void Execute(object active, Hero hero, IBattleAnimationSequence battleAnimationSequence, Action p)
         {
-            hero.Health.TakeDamage(Damage);
+            hero.Health.TakeDamage(Power);
             p.Invoke();
+        }
+
+        public bool IsGroundOnly()
+        {
+            throw new NotImplementedException();
         }
     }
 
-    public enum EnemyAttack
-    {
-        GoomnutJump,
-        GoomaKingKick,
-        PowerJump,
-        JrTroopaPowerJump,
-        JrTroopaJump,
-        MagikoopTestAttack1,
-        FuzzieSuck,
-        GoombaBonk
-    }
+  
 }

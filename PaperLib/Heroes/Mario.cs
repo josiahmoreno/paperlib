@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using Items;
 using MenuData;
+using PaperLib.Sequence;
 
 namespace Heroes
 {
@@ -15,7 +16,7 @@ namespace Heroes
     {
         private IProtection protection;
 
-
+        public ISequenceable Sequenceable { get; set; }
         public Mario(Hero[] partners, List<IJumps> jumps):this( partners,new Inventory(), jumps.ToArray(),new Hammer())
         {
             
@@ -42,12 +43,17 @@ namespace Heroes
             Actions[0] = new MenuData.ActionMenuData("Strategies",new ChangeMemberOption(partners), new DoNothingOption(), new RunAwayOption());
             Actions[1] = new MenuData.ItemsMenuData(iventory);
             Actions[2] = new MenuData.JumpMenuData(new DefaultActionMenuStore(),jumps);
+            if(jumps.Length > 0)
+            {
+
+            this.Jumps = jumps.ToList().Cast<IJumps>().ToList();
+            }
             Actions[3] = new MenuData.HammerMenuData(new DefaultActionMenuStore(),hammers);
         }
 
-        public bool Attacks(IAttack attack, Enemy target, bool ActionCommandSuccessful)
+        public bool Attack(IAttack attack, IEntity target, bool ActionCommandSuccessful)
         {
-            return target.TakeDamage(this.protection, attack, ActionCommandSuccessful);
+            return target.TakeDamage(attack,this.protection,  ActionCommandSuccessful);
         }
 
         public Mario(IProtection protection) : this( new Hero[0],new Inventory(), new IAttack[0])
@@ -70,7 +76,8 @@ namespace Heroes
 
         public void Hammers(Enemy enemy)
         {
-            enemy.TakeDamage(protection, new Hammer(), false);
+
+            enemy.TakeDamage( new Hammer(), protection, false);
         }
 
         public void JumpOn(Enemy enemy, IJumps jumps = null)
@@ -81,7 +88,8 @@ namespace Heroes
 
             }
 
-            enemy.TakeDamage(protection, jumps, false);
+            //  bool TakeDamage(IAttack enemyAttack, IProtection protection,bool successfulActionCommand = false);
+            enemy.TakeDamage(jumps, protection, false);
 
             // throw new System.NotImplementedException();
         }
@@ -91,17 +99,18 @@ namespace Heroes
             return $"{GetType().Name} : hp = {Health.CurrentValue}, actions {Actions.Length}";
         }
 
-        public void TakeDamage(IEnemyAttack enemyAttack, bool successfulActionCommand)
+        public bool TakeDamage(IAttack enemyAttack, IProtection protection, bool successfulActionCommand)
         {
             if (successfulActionCommand)
             {
-                Health.TakeDamage(enemyAttack.Damage -1 );
+                Health.TakeDamage(enemyAttack.Power -1 );
             }
             else
             {
-                Health.TakeDamage(enemyAttack.Damage);
+                Health.TakeDamage(enemyAttack.Power);
 
-            }
+            } 
+            return true;
         }
 
        

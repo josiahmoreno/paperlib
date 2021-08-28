@@ -11,6 +11,14 @@ namespace Attacks
         BaseHammer,
         Headbonk,
         HammerThrow,
-        PowerShell
+        PowerShell,
+        HealAttack,
+        GoomnutJump,
+        GoomaKingKick,
+        JrTroopaPowerJump,
+        JrTroopaJump,
+        MagikoopTestAttack1,
+        FuzzieSuck,
+        GoombaBonk
     }
 }

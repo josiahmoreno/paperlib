@@ -1,11 +1,12 @@
 ﻿using System;
+using Attacks;
 using Heroes;
 
 namespace Battle
 {
-    public interface IEnemyAttack : IEquatable<IEnemyAttack>
+    public interface IEnemyAttack : IAttack, IEquatable<IEnemyAttack>
     {
-        int Damage { get; }
+       
         void Execute(object active, Hero hero,IBattleAnimationSequence battleAnimationSequence ,Action p);
     }
 }

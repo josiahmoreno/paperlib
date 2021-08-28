@@ -6,6 +6,7 @@ namespace Attributes
 {
     public interface IHealth: IEquatable<IHealth>
     {
+        int Max { get;  }
         int CurrentValue { get; }
 
         void TakeDamage( int damage);

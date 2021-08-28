@@ -5,7 +5,7 @@
         int Power { get; }
 
         bool IsGroundOnly();
-        bool IsJump();
+        bool CanHitFlying();
 
         Attacks Identifier { get; }
     }

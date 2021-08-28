@@ -15,7 +15,7 @@ namespace Attacks
             return false;
         }
 
-        public bool IsJump()
+        public bool CanHitFlying()
         {
             return true;
         }

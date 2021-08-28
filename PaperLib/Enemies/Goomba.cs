@@ -2,6 +2,7 @@
 using Attributes;
 using Battle;
 using Heroes;
+using PaperLib.Sequence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,9 +53,9 @@ namespace Enemies
       
 
 
+        
 
-
-        public bool TakeDamage(IProtection protection,IAttack attack, bool ActionCommandSuccessful)
+        public bool TakeDamage(IAttack attack, IProtection protection, bool ActionCommandSuccessful)
         {
             //can be attacked by the 'hammer' (attack)
             bool successful = false;
@@ -108,6 +109,11 @@ namespace Enemies
 
         private string _identifier;
         public string Identifier { get => _identifier; set => _identifier = value; }
+
+        public IMovementTarget MovementTarget { get; set; }
+
+        public ISequenceable Sequenceable => throw new NotImplementedException();
+
         public override string ToString()
         {
             return $"{this.GetType().Name}, hp =  {Health.CurrentValue.ToString()}";
@@ -183,6 +189,11 @@ namespace Enemies
                    EqualityComparer<List<IEnemyAttack>>.Default.Equals(Sequence, other.Sequence) &&
                    _identifier == other._identifier &&
                    Identifier == other.Identifier;
+        }
+
+        public bool Attack(IAttack attack, IEntity target, bool succ)
+        {
+            throw new NotImplementedException();
         }
     }
 }

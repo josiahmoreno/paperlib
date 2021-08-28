@@ -39,7 +39,7 @@ namespace MenuData
             bool succ = battleAnimationSequence.Sucessful;
             var results = targets.Select(target => {
 
-                bool attWasSuc = mario.Attacks(Attack, target, succ);
+                bool attWasSuc = mario.Attack(Attack, target, succ);
                 return new Tuple<Enemy,bool>(target, attWasSuc);
                 }).ToList();
             p.Invoke(results);

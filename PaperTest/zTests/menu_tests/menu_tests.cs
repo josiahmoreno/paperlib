@@ -32,9 +32,9 @@ namespace Tests.menu_tests
             
             //
             var jrTroopaOne = new Enemies.JrTroopa(new List<IEnemyAttack>
-                { new RegularAttack(EnemyAttack.JrTroopaJump, 1) });
+                { new RegularAttackWrapper(Attacks.Attacks.JrTroopaJump, 1) });
             var jrTroopaTwo = new Enemies.JrTroopa(new List<IEnemyAttack>
-                { new RegularAttack(EnemyAttack.JrTroopaJump, 1) });
+                { new RegularAttackWrapper(Attacks.Attacks.JrTroopaJump, 1) });
             Assert.IsTrue(NewBaseEnemy.Comparer.Equals(jrTroopaOne, jrTroopaTwo));
         }
     }

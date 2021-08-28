@@ -15,7 +15,7 @@ namespace Attributes
 
         public bool CanAttack(IProtection protection, IAttack attack)
         {
-            return !attack.IsJump() || ( protection?.Value == (Protections.SpikeShield));
+            return !attack.CanHitFlying() || ( protection?.Value == (Protections.SpikeShield));
         }
 
         public bool Matches(Attributes spiked)

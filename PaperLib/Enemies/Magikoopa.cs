@@ -10,7 +10,7 @@ namespace Enemies
 
         public Magikoopa() : base(new HealthImpl(8))
         {
-            this.Moves.Add(new RegularAttack(EnemyAttack.MagikoopTestAttack1, 3));
+            this.Moves.Add(new RegularAttackWrapper(Attacks.Attacks.MagikoopTestAttack1, 3));
             this.Attrs = new IAttribute[] {new Flying() };
         }
     }

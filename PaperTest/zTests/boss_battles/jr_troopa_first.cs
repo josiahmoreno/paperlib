@@ -106,7 +106,7 @@ namespace Tests
                 new Attacks.Hammer());
             Goompa = new Goompa();
             var scriptAttack = new ScriptAttack(EnemyAttack.JrTroopaPowerJump);
-            JrTroopa = new JrTroopa(new List<IEnemyAttack> { new RegularAttack(EnemyAttack.JrTroopaJump, 1) });
+            JrTroopa = new JrTroopa(new List<IEnemyAttack> { new RegularAttackWrapper(EnemyAttack.JrTroopaJump, 1) });
 
             var enemies = new List<Enemy>()
             {

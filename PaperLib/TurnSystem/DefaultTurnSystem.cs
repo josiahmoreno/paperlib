@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using Enemies;
 using Heroes;
+using PaperLib;
 using Tests;
 
 namespace Battle
 {
     public delegate void OnSwapped(object sender, EventHandler<object> args);
-    internal class DefaultTurnSystem : ITurnSystem
+    public class DefaultTurnSystem : ITurnSystem
     {
+        private ILogger _logger;
+
+        public DefaultTurnSystem(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         private object _active;
 
         public List<Hero> Heroes { get; private set; }
@@ -25,9 +33,9 @@ namespace Battle
                
                 _active = value;
                 History.Add(_active.GetType().Name);
-                Console.WriteLine($"{GetType().Name} - Active change {value}");
+                Console.WriteLine($"{GetType().Name} --- setting Active {value}");
                 var old = _active;
-                OnActiveChanged(_active);
+                OnActiveChanged?.Invoke(_active);
                 //Console.WriteLine($"Turns b - {old} end");
             }
         }
@@ -54,58 +62,60 @@ namespace Battle
 
             Completed.Add(Active);
             var oldActive1 = Active;
-            Console.WriteLine($"Turns - {oldActive1} ends turn - Start");
+            _logger?.Log($"{GetType().Name} - starting to end turn {oldActive1}");
             bool containsEveryone = Enemies.All(enemy => enemy.EnemyType == EnemyType.Enviroment || Completed.Contains(enemy) || enemy.IsDead);
             bool containsHeroes = Heroes.Where(hero => hero is Hero && hero.Actions.Count() > 0)
                 .All((hero) => Completed.Contains(hero));
             if (Heroes.Where(hero => hero is Hero && hero.Actions.Count() > 0).All((hero) => Completed.Contains(hero)) && !containsEveryone)
             {
-               
 
+                //switching to enemy
                 Active = Enemies.First(enemy => enemy.EnemyType != EnemyType.Enviroment && !Completed.Contains(enemy) && enemy.IsAlive());
             }
             else
             {
-            
+                //switching to heroes
                 var oldActive = Active;
-                foreach (Hero hero in Heroes)
-                {
-                    Console.WriteLine($"------  {hero}");
-                }
+
+                _logger?.Log($"{GetType().Name} ------ switching to heroes {string.Join(",", Heroes.Select(h => h.ToString()).ToArray())}, oldActive = {oldActive}");
 
                 if (containsEveryone && containsHeroes)
                 {
                     Completed.Clear();
-                    Console.WriteLine($"-------- yoyo");
-                    oldActive = null;
+                    //_logger?.Log($"{GetType().Name} - yoyo");
+                    //why did i write this
+                    //oldActive = null;
                 }
                 var nextTurn = Heroes.First((hero) => hero != oldActive && hero.Actions.Length > 0);
-                Console.WriteLine($"-------- next Turn = {nextTurn}");
+                _logger?.Log($"{GetType().Name} ------ next turn will be {nextTurn}, oldActive {oldActive}");
                 Active = nextTurn;
-                OnSwapped?.Invoke(this, EventArgs.Empty);
+                if ((oldActive is Hero) && (Active is Hero) && oldActive != nextTurn )
+                {
+                    _logger?.Log($"{GetType().Name} --- activating swap = {nextTurn} from {oldActive}");
+                    OnSwapped?.Invoke(this, EventArgs.Empty);
+                }
             }
-            Console.WriteLine($"--------- {oldActive1} ends turn, new active is now {Active} - END");
+            _logger?.Log($"{GetType().Name} ------  ending turn finished {oldActive1} , new active is now {Active} - END");
 
         }
 
         public void Load(List<Hero> heroes, List<Enemy> enemies)
         {
-            if(heroes.Count() == 0 || enemies.Count == 0)
+            _logger?.Log($"{GetType().Name} - loading...");
+            if (heroes.Count() == 0 || enemies.Count == 0)
             {
                 throw new Exception("Must have enemies AND heroes with turns");
             }
             this.Heroes = heroes;
-            foreach (Hero hero in Heroes)
-            {
-                Console.WriteLine($"------  {hero}");
-            }
+            _logger?.Log($"{GetType().Name} - just loaded {string.Join(",",Heroes.Select(h=> h.ToString()).ToArray())}");
+           
             this.Enemies = enemies;
             Active = heroes.First();
         }
 
         public void Swap()
         {
-            Console.WriteLine($"Turns - Swap {Heroes.Count()}");
+            _logger?.Log($"{GetType().Name} - - Swap {Heroes.Count()}");
             if (Active is Hero hero)
             {
 

@@ -3,6 +3,7 @@ using Attributes;
 using Battle;
 using Enemies;
 using MenuData;
+using PaperLib.Sequence;
 using System.Collections.Generic;
 using Tests;
 
@@ -16,9 +17,11 @@ namespace Heroes
         public virtual Heroes? Identity { get; set; } = Heroes.Mario;
         public IHealth Health { get; private set; } = new HealthImpl(10);
 
-        public bool Attacks(IAttack attack, Enemy target, bool ActionCommandSuccessful)
+        public ISequenceable Sequenceable { get; set; }
+
+        public bool Attack(IAttack attack, IEntity target, bool ActionCommandSuccessful)
         {
-            return target.TakeDamage(this.protection, attack, ActionCommandSuccessful);
+            return target.TakeDamage( attack, this.protection, ActionCommandSuccessful);
         }
 
 
@@ -72,17 +75,18 @@ namespace Heroes
             return hashCode;
         }
 
-        public void TakeDamage(IEnemyAttack enemyAttack, bool successfulActionCommand)
+        public bool TakeDamage(IAttack enemyAttack, IProtection protection, bool successfulActionCommand)
         {
             if (successfulActionCommand)
             {
-                Health.TakeDamage(enemyAttack.Damage - 1);
+                Health.TakeDamage(enemyAttack.Power - 1);
             }
             else
             {
-                Health.TakeDamage(enemyAttack.Damage);
+                Health.TakeDamage(enemyAttack.Power);
 
-            }
+            } 
+            return true;
         }
     }
 }

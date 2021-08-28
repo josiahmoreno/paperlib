@@ -4,11 +4,11 @@ using Heroes;
 
 namespace Attacks
 {
-     public class  GoombaKingKick: RegularAttack
+     public class  GoombaKingKick: RegularAttackWrapper
     {
        
 
-        public GoombaKingKick() : base(EnemyAttack.GoomaKingKick, 2)
+        public GoombaKingKick() : base(Attacks.GoomaKingKick, 2)
         {
            
         }
