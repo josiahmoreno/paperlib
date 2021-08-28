@@ -11,12 +11,13 @@ namespace Battle
     {
         public RegularAttackWrapper(Attacks.Attacks goomaKingKick, int damage)
         {
+            this.Identifier = goomaKingKick;
             this.Power = damage;
         }
 
         public int Power { get; }
 
-        public Attacks.Attacks Identifier => throw new NotImplementedException();
+        public Attacks.Attacks Identifier { get; }
 
         public bool CanHitFlying()
         {
@@ -31,6 +32,7 @@ namespace Battle
         public void Execute(object active, Hero hero, IBattleAnimationSequence battleAnimationSequence,  Action p)
         {
             var enemy = active as Enemy;
+            Console.WriteLine($"RegularAttackWrapper - {active} is attacking {hero} with {Identifier}");
             //hero.TakeDamage(this, battleAnimationSequence.Sucessful);
             //p?.Invoke();
             

@@ -313,7 +313,7 @@ namespace Tests
             battle.ConfirmTarget();
             int goombaKingHealth = battle.Enemies.First(enemy => enemy == GoombaKing).Health.CurrentValue;
             Assert.IsTrue(condition: goombaKingHealth == 7, message: $"goombaking health is not 7, {goombaKingHealth}");
-            Enemy redGoomba = battle.Enemies.First(enemy => enemy is RedGoomba);
+            Enemy redGoomba = battle.Enemies.First(enemy => enemy is NewRedGoomba);
             Assert.IsTrue(condition: redGoomba.IsDead, message: $"redGoomba is not dead, {redGoomba}");
             Enemy blueGoomba = battle.Enemies.First(enemy => enemy is NewBlueGoomba);
             Assert.IsTrue(condition: blueGoomba.IsDead, message: $"blueGoomba is not dead, {blueGoomba}");

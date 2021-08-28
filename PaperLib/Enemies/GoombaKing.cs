@@ -7,12 +7,12 @@ using Tests;
 
 namespace Enemies
 {
-    public class GoombaKing : Goomba
+    public class GoombaKing : NewBaseEnemy
     {
-        private List<IEnemyAttack> sequence = new List<IEnemyAttack>();
+        
        
         
-        public GoombaKing(List<IEnemyAttack> moves) : base(new HealthImpl(10))
+        public GoombaKing(List<IEnemyAttack> moves) : base(new HealthImpl(10),new TattleStore())
         {
             //this.Moves = moves;
             moves.ForEach(move => {
@@ -27,6 +27,9 @@ namespace Enemies
                 });
         }
 
+        public override string Identifier { get; set; } = "GoombaKing";
+
+        private List<IEnemyAttack> sequence = new List<IEnemyAttack>();
         public override IEnemyAttack GetRandomMove()
         {
             if (sequence?.Count > 0)
