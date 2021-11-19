@@ -3,20 +3,16 @@ using System;
 
 namespace Tests.battlesequence
 {
-    internal class TestTarget: IMovementTarget
+    internal class TestTarget: IPositionable
     {
-        float x;
-        float y;
-        float z;
+        public float x { get; set; }
+        public float y { get; set; }
+        public float z { get; set; }
         public TestTarget()
         {
-            Position = new Tuple<float, float, float>(x,y,z);
+           
         }
 
-        public TestTarget(Tuple<float, float, float> position)
-        {
-            Position = position;
-        }
 
         public TestTarget(float x,float y, float z)
         {
@@ -25,10 +21,10 @@ namespace Tests.battlesequence
             this.z = z;
         }
 
-        public Tuple<float, float, float> Position { get; set; } = new Tuple<float, float, float>(0, 0, 0);
-        public IMovementTarget Copy()
+   
+        public IPositionable CopyPosition()
         {
-            return new TestTarget(position: Position);
+            return new TestTarget(x,y,z);
         }
 
         public override string ToString()

@@ -110,7 +110,7 @@ namespace Enemies
         private string _identifier;
         public string Identifier { get => _identifier; set => _identifier = value; }
 
-        public IMovementTarget MovementTarget { get; set; }
+        public IPositionable MovementTarget { get; set; }
 
         public ISequenceable Sequenceable { get; set; }
 

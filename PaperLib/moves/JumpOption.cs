@@ -27,7 +27,7 @@ namespace MenuData
             var damageTarget = new DamageTarget(Attack, mario, targets[0], () => {
                 return Battle.Battle.ActionCommandCenter.FetchSequence().Sucessful;
             });
-            var jumpSequence = new JumpSequence(null, damageTarget);
+            var jumpSequence = new JumpSequence(Battle.Battle.Logger);
             void onComplete(object sender,EventArgs args)
             {
                 jumpSequence.OnComplete -= onComplete;
@@ -36,7 +36,7 @@ namespace MenuData
                 p(list);
             }
             jumpSequence.OnComplete += onComplete;
-            jumpSequence.Execute(mario.Sequenceable, targets[0].Sequenceable); ;
+            jumpSequence.Execute(mario.Sequenceable, targets[0].Sequenceable, damageTarget); 
         }
     }
 }

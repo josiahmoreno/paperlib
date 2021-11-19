@@ -40,14 +40,14 @@ namespace Battle
             var damageTarget = new DamageTarget(this, enemy,hero, () => {
                 return Battle.ActionCommandCenter.FetchSequence().Sucessful;
             });
-            var jumpSequence = new JumpSequence(Battle.Logger, damageTarget);
+            var jumpSequence = new JumpSequence(Battle.Logger);
             void onComplete(object sender, EventArgs args)
             {
                 jumpSequence.OnComplete -= onComplete;
                 p();
             }
             jumpSequence.OnComplete += onComplete;
-            jumpSequence.Execute(enemy.Sequenceable, hero.Sequenceable); ;
+            jumpSequence.Execute(enemy.Sequenceable, hero.Sequenceable, damageTarget); ;
         }
 
         public bool IsGroundOnly()

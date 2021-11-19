@@ -9,22 +9,23 @@ namespace Enemies
 {
     public class GoombaKing : NewBaseEnemy
     {
-        
-       
-        
-        public GoombaKing(List<IEnemyAttack> moves) : base(new HealthImpl(10),new TattleStore())
+
+
+
+        public GoombaKing(List<IEnemyAttack> moves) : base(new HealthImpl(10), new TattleStore())
         {
             //this.Moves = moves;
             moves.ForEach(move => {
-                if(move is ScriptAttack scriptAttack)
+                if (move is ScriptAttack scriptAttack)
                 {
                     sequence.Add(move);
-                } else
+                }
+                else
                 {
                     Moves.Add(move);
                 }
-                
-                });
+
+            });
         }
 
         public override string Identifier { get; set; } = "GoombaKing";
@@ -42,8 +43,8 @@ namespace Enemies
             {
                 var random = new System.Random();
                 var index = random.Next(Moves.Count);
-                return  Moves[index];
-               
+                return Moves[index];
+
             }
         }
 

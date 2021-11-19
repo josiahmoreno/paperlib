@@ -6,19 +6,15 @@ namespace PaperLib.Sequence
 {
     internal class JumpAnimation: ISequenceStep
     {
-        private IMovementTarget movementTarget;
+        private IPositionable movementTarget;
         private ILogger Logger;
-        public JumpAnimation(ILogger logger, IMovementTarget movementTarget)
+        public JumpAnimation(ILogger logger, IPositionable movementTarget)
         {
             this.movementTarget = movementTarget;
             Logger = logger;
         }
 
         public event EventHandler OnComplete;
-        private bool IsCompleted;
-
-        public Func<bool> QuickTime { get; internal set; }
-
         public void Start(ISequenceable hero)
         {
 

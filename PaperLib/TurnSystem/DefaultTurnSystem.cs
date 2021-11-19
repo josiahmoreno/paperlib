@@ -56,6 +56,8 @@ namespace Battle
             }
         }
 
+        public bool IsLoaded { get; set; }
+
         private HashSet<string> currentTurn = new HashSet<string>();
         public void End()
         {
@@ -112,16 +114,21 @@ namespace Battle
 
         public void Load(List<Hero> heroes, List<Enemy> enemies)
         {
-            _logger?.Log($"{GetType().Name} - loading...");
+            if (IsLoaded)
+            {
+                throw new Exception("Can't reload a turn system");
+            }
+            _logger?.Log($"{GetType().Name} - loading... {heroes.Count} {enemies.Count}");
             if (heroes.Count() == 0 || enemies.Count == 0)
             {
                 throw new Exception("Must have enemies AND heroes with turns");
             }
             this.Heroes = heroes;
-            _logger?.Log($"{GetType().Name} - just loaded {string.Join(",",Heroes.Select(h=> h.ToString()).ToArray())}");
+            _logger?.Log($"{GetType().Name} - just loaded {string.Join(",",Heroes.Select(h=> h.ToString()).ToArray())}. enemies {string.Join(",", enemies.Select(h => h.ToString()).ToArray())}");
            
             this.Enemies = enemies;
             Active = heroes.First();
+            IsLoaded = true;
         }
 
         public void Swap()

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Heroes;
 using MenuData;
 
@@ -46,14 +47,13 @@ namespace PaperLib.Sequence
                             throw new Exception($"can't complete again, capturedIndex={capturedIndex} {PreAnimations.Count}");
                         }
                         captComplete = true;
-                        logger?.Log($"{GetType().Name} - just completed1, capturedIndex={capturedIndex} {PreAnimations.Count}");
-                        logger?.Log($"{GetType().Name} - just completed2, {PreAnimations[capturedIndex]}");
-                        //animation.OnComplete -= onCom;
+                        //logger?.Log($"{GetType().Name} - just completed1, capturedIndex={capturedIndex} {PreAnimations.Count}");
+                        //logger?.Log($"{GetType().Name} - just completed2, {PreAnimations[capturedIndex]}");
+                      
                         PreAnimations[capturedIndex].OnComplete -= onCom;
                         
                         PreAnimations[capturedIndex + 1].Start(hero);
                     }
-                    //PreAnimations[capturedIndex + 1].OnComplete += onCom;
                     animation.OnComplete += onCom;
                     logger?.Log($"{GetType().Name} - assigning oncomplete to {animation}");
                 } else
@@ -70,9 +70,6 @@ namespace PaperLib.Sequence
 
             }
             enumator.Start(hero);
-             
-
-            //throw new NotImplementedException();
         }
 
         public event EventHandler OnComplete;
@@ -85,12 +82,15 @@ namespace PaperLib.Sequence
         void Start(ISequenceable hero);
     }
 
-    public interface ISequenceable : IMovementTarget
+    public interface ISequenceable : IPositionable
     {
-        void StartAnimation();
-        void Jump(IMovementTarget p, Action p1);
-        void MoveTo(IMovementTarget p);
+        void Jump(IPositionable p, Action p1);
+        void MoveTo(IPositionable p);
+        void Wait(SendOrPostCallback sendOrPostCallback, object v);
+
         Action OnMoveComplete { get; set; }
-        IMovementTarget CopyPosition();
+
+        //IMovementTarget MovementTarget { get; set; }
+       
     }
 }

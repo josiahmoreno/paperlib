@@ -9,7 +9,7 @@ namespace MenuData
         MenuData.IActionMenuData ActiveAction { get; }
         int SelectedIndex { get; }
         IActionMenuData[] Items { get;  }
-        Action<bool> OnHide { get; set; }
+        event EventHandler<bool> OnHide;
 
         void MoveTargetUp();
         void Hide();

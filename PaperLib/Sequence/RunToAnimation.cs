@@ -7,13 +7,13 @@ namespace PaperLib.Sequence
     {
         public ILogger Logger;
         private bool IsCompleted;
-        public RunToAnimation(ILogger logger, IMovementTarget goomba)
+        public RunToAnimation(ILogger logger, IPositionable goomba)
         {
             Logger = logger;
             Goomba = goomba;
         }
 
-        public IMovementTarget Goomba { get; }
+        public IPositionable Goomba { get; }
 
         public event EventHandler OnComplete;
         private Guid Guid = Guid.NewGuid();
@@ -24,7 +24,7 @@ namespace PaperLib.Sequence
                 throw new Exception("can't rerun a completed animation");
             }
             Logger?.Log($"{this} {Guid.ToString().Substring(0,4)} moving to {{{Goomba}}}");
-            Tuple<float, float, float> a = Goomba.Position;
+         
             hero.OnMoveComplete = () =>
             {
                 Logger?.Log($"{this} oncomplete {{{Goomba}}}, Complete == null {OnComplete == null}");

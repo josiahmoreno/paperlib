@@ -3,6 +3,9 @@ using Heroes;
 using NUnit.Framework;
 using System.Collections.Generic;
 using Enemies;
+using MenuData;
+using PaperLib.Enemies;
+using System;
 
 namespace Tests.menu_tests
 {
@@ -15,7 +18,7 @@ namespace Tests.menu_tests
         {
             var mario = new Mario();
             var mario2 = new Mario();
-            Assert.AreEqual(mario, mario2);
+            Assert.IsTrue(Mario.Comparer.Equals(mario, mario2));
         }
 
         [Test]
@@ -37,5 +40,19 @@ namespace Tests.menu_tests
                 { new RegularAttackWrapper(Attacks.Attacks.JrTroopaJump, 1) });
             Assert.IsTrue(NewBaseEnemy.Comparer.Equals(jrTroopaOne, jrTroopaTwo));
         }
+
+
+        [Test]
+        public void battleMenuShowing()
+        {
+            Battle.Battle.Logger = new TestLogger();
+            Battle.Battle battle = new Battle.Battle();
+            battle.Load(new List<Hero>() { new Mario() }, new List<Enemy>() { new EnemyFactory().FetchEnemy<NewGoomba>() });
+            battle.Start();
+            IActionMenu menu = battle.ActionMenu;
+            battle.Execute();
+            Assert.IsFalse(menu.Showing);
+        }
+
     }
 }

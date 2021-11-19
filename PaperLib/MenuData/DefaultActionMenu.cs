@@ -16,7 +16,7 @@ namespace MenuData
         private bool showing_;
         public bool Showing { get => showing_; private set {
                 showing_ = value;
-                OnHide?.Invoke(showing_);
+                OnHide?.Invoke(this,showing_);
             }
         }
 
@@ -34,7 +34,7 @@ namespace MenuData
             }
         }
 
-        public Action<bool> OnHide { get ; set ; }
+        public event EventHandler<bool> OnHide;
         public DefaultActionMenu(ITurnSystem turnSystem)
         {
             Console.WriteLine($"{GetType().Name} -  init");
@@ -49,13 +49,13 @@ namespace MenuData
             Console.WriteLine($"{GetType().Name} - 1OnActiveChanged  {obj}");
            
 
-            Console.WriteLine($"{GetType().Name} - 2OnActiveChanged STARTED  {obj?.ToString()} - {(Showing ? "Showing" : "Hidden" )}, SelectedIndex {SelectedIndex} ");
+            //Console.WriteLine($"{GetType().Name} - 2OnActiveChanged STARTED  {obj?.ToString()} - {(Showing ? "Showing" : "Hidden" )}, SelectedIndex {SelectedIndex} ");
             if (obj is Hero)
             {
 
                 var change = CurrentHero != obj;
                 CurrentHero = obj as Hero;
-                Console.WriteLine($"{GetType().Name} - 3OnActiveChanged  {CurrentHero} {CurrentHero.Actions.Length} ");
+                //Console.WriteLine($"{GetType().Name} - 3OnActiveChanged  {CurrentHero} {CurrentHero.Actions.Length} ");
                 Items = CurrentHero.Actions;
                 if (history.ContainsKey(obj))
                 {
@@ -77,7 +77,7 @@ namespace MenuData
             {
                 CurrentHero = null;
             }
-            Console.WriteLine($"{GetType().Name} - 4OnActiveChanged ENDED {obj} - {(Showing ? "Showing" : "Hidden")}, SelectedIndex {SelectedIndex}");
+            //Console.WriteLine($"{GetType().Name} - 4OnActiveChanged ENDED {obj} - {(Showing ? "Showing" : "Hidden")}, SelectedIndex {SelectedIndex}");
         }
 
         public void Start()

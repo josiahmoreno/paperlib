@@ -89,7 +89,11 @@ namespace TargetSystem
 
         public void Show(IOption option)
         {
-            Console.WriteLine($"TargetSystem - Show {option.Name} {option.TargetType}");
+            if(enemies.Count == 0)
+            {
+                throw new Exception("enemies can't be zero");
+            }
+            Console.WriteLine($"TargetSystem - Show {option.Name} {option.TargetType}, enemies.count = {enemies.Count}");
             this.currentOption = option;
             if (option.TargetType == TargetType.Single)
             {

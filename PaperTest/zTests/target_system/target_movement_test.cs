@@ -7,6 +7,7 @@ using Enemies;
 using Heroes;
 using NUnit.Framework;
 using PaperLib.Enemies;
+using Tests.battlesequence;
 using Battler = Battle.Battle;
 
 namespace Tests.target_system
@@ -19,9 +20,19 @@ namespace Tests.target_system
         public void setup()
         {
             this.Battle = new Battler();
-            Battle.Heroes = new List<Hero>() {new Mario(jumps: new List<IJumps>{new Jump(),new PowerJump()}), new Goombario()};
+            var mario = new Mario(jumps: new List<IJumps> { new Jump(), new PowerJump() });
+            mario.Sequenceable = new TestSequenceable();
+            var goombario = new Goombario();
+            goombario.Sequenceable = new TestSequenceable();
+            Battle.Heroes = new List<Hero>(){ mario, goombario };
             var fac = new EnemyFactory();
-            Battle.Enemies = new List<Enemy>() {fac.FetchEnemy<NewGoomba>(), fac.FetchEnemy<NewGoomba>(), fac.FetchEnemy<NewGoomba>() };
+            var goomba1 = fac.FetchEnemy<NewGoomba>();
+            goomba1.Sequenceable = new TestSequenceable();
+            var goomba2 = fac.FetchEnemy<NewGoomba>();
+            goomba2.Sequenceable = new TestSequenceable();
+            var goomba3 = fac.FetchEnemy<NewGoomba>();
+            goomba3.Sequenceable = new TestSequenceable();
+            Battle.Enemies = new List<Enemy>() { goomba1, goomba2, goomba3 };
             Battle.Start();
         }
 

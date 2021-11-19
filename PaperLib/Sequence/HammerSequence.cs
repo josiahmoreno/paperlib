@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace PaperLib.Sequence
 {
-    public class JumpSequence : ISequence
+    public class HammerSequence : ISequence
     {
         private ILogger Logger;
-        public JumpSequence(ILogger logger)
+        public HammerSequence(ILogger logger)
         {
             this.Logger = logger;
 
@@ -25,19 +25,20 @@ namespace PaperLib.Sequence
             Logger?.Log($"{GetType().Name} - starting at {mario} and moving to {movementTarget}, then back to {startingMarioPosition}");
             var firstLaunchPosition = movementTarget.CopyPosition();
             var goombaPosition = movementTarget.CopyPosition();
-            int offset = startingMarioPosition.x > goombaPosition.x ? -100 : 100;
-            firstLaunchPosition.x -= offset;
+            Logger?.Log($"{GetType().Name} - startingMarioPosition {{{startingMarioPosition.x}}}/goombaPosition {{{goombaPosition.x}}}");
+            if (startingMarioPosition.x < goombaPosition.x)
+            {
+
+                firstLaunchPosition.x = firstLaunchPosition.x - 40;
+            }
 
             var landingPosition = firstLaunchPosition.CopyPosition();
 
             var runUp = new RunToAnimation(Logger, firstLaunchPosition);
-            var jumpOnto = new JumpAnimation(Logger, goombaPosition);
+            ISequenceStep wait = new HammerWindUpAnimation(Logger);
             var damage = new DamageStep(Logger, damageTarget);
-            var jumpOff = new JumpAnimation(Logger, landingPosition);
             var runBack = new RunToAnimation(Logger, startingMarioPosition);
-            Logger?.Log($"{GetType().Name} - running back to {startingMarioPosition}");
-
-            var battleSequence = new BattleSequence(Logger, new List<ISequenceStep> { runUp, jumpOnto, damage, jumpOff, runBack }, mario, runBack);
+            var battleSequence = new BattleSequence(Logger, new List<ISequenceStep> { runUp, wait, damage, runBack }, mario, runBack);
             battleSequence.OnComplete += BattleSequence_OnComplete;
             battleSequence.Execute();
         }

@@ -15,6 +15,7 @@ namespace Tests
 
         List<string> History { get; }
         string LastActive { get; }
+        bool IsLoaded { get; }
 
         void Load(List<Hero> heroes, List<Enemy> enemies);
         void Swap();

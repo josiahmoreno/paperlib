@@ -1,5 +1,6 @@
 ﻿using Attacks;
 using Battle;
+using PaperLib.Sequence;
 using System.Linq;
 
 namespace MenuData
@@ -12,7 +13,7 @@ namespace MenuData
         {
             Options = IAttack.ToList().Select((item) =>
             {
-                return new MenuData.HammerOption(store,item);
+                return new MenuData.HammerOption(store,item, new HammerSequence(Battle.Battle.Logger));
             }).ToArray();
         }
     }

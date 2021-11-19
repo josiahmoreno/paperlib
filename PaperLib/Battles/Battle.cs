@@ -37,6 +37,12 @@ namespace Battle
 
         public IEnemyAISysytem enemyAISysytem { get; internal set; }
 
+        public void Load(List<Hero> heroes, List<Enemy> enemies)
+        {
+            TurnSystem.Load(heroes, enemies);
+            this.TargetSystem = new DefaultTargetSystem(enemies);
+        }
+
         private IActionMenuStore actionMenuStore = new DefaultActionMenuStore();
         public Battle()
         {
@@ -44,7 +50,7 @@ namespace Battle
             enemyAISysytem = new DefaultEnemyAiSystem(this, TurnSystem);
             ActionMenu = new DefaultActionMenu(TurnSystem);
             TextBubbleSystem = new TextBubbleSystem();
-            //TargetSystem = new DefaultTargetSystem(Enemies);
+            TargetSystem = new DefaultTargetSystem(Enemies);
             //HealthCounter = new MarioHealthCounter(Heroes);
             //actionMenuStore ;
         }
@@ -129,7 +135,11 @@ namespace Battle
             {
                 TargetSystem = new DefaultTargetSystem(Enemies);
             }
-            TurnSystem.Load(Heroes, Enemies);
+            if (!TurnSystem.IsLoaded)
+            {
+                TurnSystem.Load(Heroes, Enemies);
+
+            }
         }
         public void Start()
         {
@@ -297,6 +307,10 @@ namespace Battle
 
         public void Execute()
         {
+            if(TargetSystem == null)
+            {
+                throw new NullReferenceException("targetSystem is nuii");
+            }
             if (ActionMenu.Showing)
             {
                 ExecuteFromActionMenu();

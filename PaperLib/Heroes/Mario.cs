@@ -28,7 +28,7 @@ namespace Heroes
 
         public IInventory iventory { get; set; }
 
-        public Mario() : this( new Hero[0], new Inventory(), new IAttack[0],new Hammer())
+        public Mario() : this( new Hero[0], new Inventory(), new IAttack[] { new Jump()},new Hammer())
         {
 
         }

@@ -1,46 +1,48 @@
 ﻿using PaperLib.Sequence;
 using System;
+using System.Threading;
 
 namespace Tests.battlesequence
 {
     internal class TestSequenceable: ISequenceable
     {
+
         public TestSequenceable()
         {
         }
 
-        public Tuple<float, float, float> Position { get; set; } = new Tuple<float, float, float>(0f,0f,0f);
-        public IMovementTarget Copy()
-        {
-           return new TestTarget(Position);
-        }
+        ////public Tuple<float, float, float> Position { get; set; } = new Tuple<float, float, float>(0f,0f,0f);
+        //public IMovementTarget CopyPosition()
+        //{
+        //    return MovementTarget.CopyPosition(); ;
+        //}
 
         public Action OnMoveComplete { get; set ; }
 
-    
-       
+        //public IPositionable MovementTarget { get; set; } = new TestTarget(0, 0, 0);
+        public float x { get; set; }
+        public float y { get; set; }
+        public float z { get ; set; }
 
-        public void Jump(IMovementTarget p, Action p1)
+        public IPositionable CopyPosition()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Jump(IPositionable p, Action p1)
         {
             p1();
         }
 
-        public void MoveTo(IMovementTarget p)
+        public void MoveTo(IPositionable p)
         {
             OnMoveComplete();
             //throw new System.NotImplementedException();
         }
 
-        public void StartAnimation()
+        public void Wait(SendOrPostCallback sendOrPostCallback, object v)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
-
-        public IMovementTarget CopyPosition()
-        {
-            return new TestTarget(Position);
-        }
-
-       
     }
 }

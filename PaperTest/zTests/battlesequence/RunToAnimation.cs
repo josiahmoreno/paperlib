@@ -6,19 +6,19 @@ namespace PaperLib.Sequence
     internal class RunToAnimation : ISequenceStep
     {
        
-        public RunToAnimation(IMovementTarget goomba)
+        public RunToAnimation(IPositionable goomba)
         {
             Goomba = goomba;
         }
 
-        public IMovementTarget Goomba { get; }
+        public IPositionable Goomba { get; }
 
         public event EventHandler OnComplete;
 
         public void Start(ISequenceable hero)
         {
             Console.WriteLine($"{this} start {{{Goomba}}}");
-            Tuple<float, float, float> a = Goomba.Position;
+           
             hero.OnMoveComplete = () => { OnComplete(this, EventArgs.Empty); };
             hero.MoveTo(Goomba);
             
@@ -27,7 +27,7 @@ namespace PaperLib.Sequence
 
         public override string ToString()
         {
-            return $"{GetType().Name} - {Goomba.Position}";
+            return $"{GetType().Name} - {Goomba}";
         }
     }
 }
