@@ -4,7 +4,7 @@ namespace Heroes
 {
     internal class PowerShell : IAttack
     {
-        public int Power => 1;
+        public int Power => 2;
 
         public Attacks.Attacks Identifier => Attacks.Attacks.PowerShell;
 

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Battle;
+using System;
 
 namespace MenuData
 {
-    public interface IActionMenu
+    public interface IActionMenu: IMenu, IHasMoveableTarget
     {
         bool Showing { get;  }
         event EventHandler<IActionMenuData> OnActiveActionChanged;
@@ -11,10 +12,9 @@ namespace MenuData
         IActionMenuData[] Items { get;  }
         event EventHandler<bool> OnHide;
 
-        void MoveTargetUp();
+
         void Hide();
-        void MoveTargetDown();
-        void Start();
+
         void Process();
         void Show();
     }

@@ -9,6 +9,7 @@ using System.Linq;
 using Items;
 using MenuData;
 using PaperLib.Sequence;
+using static Attacks.Jump;
 
 namespace Heroes
 {
@@ -109,7 +110,8 @@ namespace Heroes
             {
                 Health.TakeDamage(enemyAttack.Power);
 
-            } 
+            }
+            Console.WriteLine($"Ouch! {this.GetType().Name} is now at{this.Health.CurrentValue}");
             return true;
         }
 
@@ -184,7 +186,7 @@ namespace Heroes
                     {
        
                     }
-                    if(!Enumerable.SequenceEqual(x.Jumps, y.Jumps))
+                    if(!Enumerable.SequenceEqual(x.Jumps, y.Jumps, new JumpEq()))
                     {
                         return false;
                     }

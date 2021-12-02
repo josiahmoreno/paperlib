@@ -38,6 +38,7 @@ namespace Battle
             
            
             var damageTarget = new DamageTarget(this, enemy,hero, () => {
+                Console.WriteLine($"RegularAttackWrapper - {active} is about to access quicktime...");
                 return Battle.ActionCommandCenter.FetchSequence().Sucessful;
             });
             var jumpSequence = new JumpSequence(Battle.Logger);

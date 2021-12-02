@@ -30,7 +30,7 @@ namespace Tests
         public void StartBattle()
         {
           
-            var encounter = new Encounter(new Goomba(),new SpikedGoomba());
+            var encounter = new EnemyConfig(new Goomba(),new SpikedGoomba());
             var battle = new Battle.Battle(new List<Hero> { mario}, encounter);
             battle.Start();
             Assert.IsTrue(battle.IsStarted());

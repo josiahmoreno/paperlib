@@ -9,11 +9,11 @@ namespace Moves
     internal class HeadbonkOption: AttackOption
     {
 
-        public HeadbonkOption() : base(new DefaultActionMenuStore(),"Headbonk", new Headbonk(), TargetType.Single)
+        public HeadbonkOption() : base(new DefaultActionMenuStore(),"Headbonk", new Headbonk(), TargetType.Single, true)
         {
         }
 
-        public HeadbonkOption(IActionMenuStore store,IAttack hammer) : base(store,"Headbonk", hammer, TargetType.Single)
+        public HeadbonkOption(IActionMenuStore store,IAttack hammer) : base(store,"Headbonk", hammer, TargetType.Single, true)
         {
         }
     

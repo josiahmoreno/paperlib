@@ -27,7 +27,7 @@ namespace Tests
         [Test]
         public void StartBattle()
         {
-            var encounter = new Encounter(new Goomba(),new SpikedGoomba());
+            var encounter = new EnemyConfig(new Goomba(),new SpikedGoomba());
             var battle = new Battle.Battle(new List<Hero> { mario}, encounter);
             battle.Start();
             Assert.IsTrue(battle.IsStarted());
@@ -37,7 +37,7 @@ namespace Tests
         [Test]
         public void HasBattleEnded()
         {
-            var encounter = new Encounter(new Goomba(), new SpikedGoomba());
+            var encounter = new EnemyConfig(new Goomba(), new SpikedGoomba());
             var battle = new Battle.Battle(new List<Hero> { mario }, encounter);
             battle.End();
             Assert.IsTrue(battle.IsEnded());
@@ -48,7 +48,7 @@ namespace Tests
         public void HasBattleEndedAfterAllEnemiesKilled()
         {
             var goomba = new Goomba();
-            var encounter = new Encounter(goomba, new SpikedGoomba());
+            var encounter = new EnemyConfig(goomba, new SpikedGoomba());
             var battle = new Battle.Battle(new List<Hero> { mario }, encounter);
             battle.Start();
             Assert.IsTrue(battle.IsStarted());

@@ -46,7 +46,7 @@ namespace MenuData
 
         private void OnActiveChanged(object obj)
         {
-            Console.WriteLine($"{GetType().Name} - 1OnActiveChanged  {obj}");
+            //Console.WriteLine($"{GetType().Name} - 1OnActiveChanged  {obj}");
            
 
             //Console.WriteLine($"{GetType().Name} - 2OnActiveChanged STARTED  {obj?.ToString()} - {(Showing ? "Showing" : "Hidden" )}, SelectedIndex {SelectedIndex} ");
@@ -80,7 +80,7 @@ namespace MenuData
             //Console.WriteLine($"{GetType().Name} - 4OnActiveChanged ENDED {obj} - {(Showing ? "Showing" : "Hidden")}, SelectedIndex {SelectedIndex}");
         }
 
-        public void Start()
+        public void OnBattleStarted()
         {
            Showing = CurrentHero is Hero;
         }
@@ -104,7 +104,7 @@ namespace MenuData
                 }
                
             
-            Console.WriteLine($"{GetType().Name} - SetActiveAction {Items.Length} {Items[selectedIndex].Name}");
+            //Console.WriteLine($"{GetType().Name} - SetActiveAction {Items.Length} {Items[selectedIndex].Name}");
             ActiveAction = Items[selectedIndex];
             history[obj] = ActiveAction;
         }
@@ -129,14 +129,14 @@ namespace MenuData
 
         public void Hide()
         {
-            Console.WriteLine("Action Menu Hidden");
+            //Console.WriteLine("Action Menu Hidden");
             Showing = false;
            
         }
 
         public void Process()
         {
-            Console.WriteLine($"{GetType().Name} - Process {CurrentHero}");
+            //Console.WriteLine($"{GetType().Name} - Process {CurrentHero}");
             Showing = CurrentHero is Hero;
         }
 

@@ -4,6 +4,7 @@ using Battle;
 using Heroes;
 using Enemies;
 using Attributes;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -14,9 +15,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            battle = new Battle.Battle();
-            battle.Heroes.Add(new Mario());
-            battle.Enemies.Add(new Goomba(new Flying()));
+            battle = new Battle.Battle(new List<Hero> { new Mario() }, new List<Enemy> { new Goomba(new Flying()) });
         }
 
         [Test]

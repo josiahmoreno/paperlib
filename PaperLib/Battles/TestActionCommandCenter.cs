@@ -8,6 +8,12 @@ namespace Battle
     {
 
         Stack<bool> stack = new Stack<bool>();
+
+        public void AddFailedPress()
+        {
+           stack.Push(false);
+        }
+
         public void AddSuccessfulPress()
         {
             stack.Push(true);
@@ -23,6 +29,7 @@ namespace Battle
             {
 
             }
+            Console.WriteLine($"fetching the sequence, and checking stack... {string.Join(",", stack.ToArray())}");
             return new DefaultBattleAnimationSequence(last);
         }
     }

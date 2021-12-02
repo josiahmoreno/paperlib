@@ -12,31 +12,40 @@ namespace MenuData
     {
         public IAttack Attack { get; set; }
         private IActionMenuStore store;
-        public AttackOption(string name,IAttack item, TargetType targetType): this(new DefaultActionMenuStore(),name,item,targetType)
+        public AttackOption(string name, IAttack item, TargetType targetType, bool quickTime = true): this(new DefaultActionMenuStore(),name,item,targetType, quickTime)
         {
            
         }
-        public AttackOption(IActionMenuStore store,string name,IAttack item, TargetType targetType)
+        public AttackOption(IActionMenuStore store,string name,IAttack item, TargetType targetType, bool quickTime)
         {
             // this.Name = name;
             this.store = store;
             this.Attack = item;
             this.TargetType = targetType;
+            this.hasQuickTime = quickTime;
         }
 
         //public string Name { get; private set; }
 
         public override Guid? Guid { get; }
         public override string Name { get => store.FetchName(this); }
-        public TargetType TargetType { get; private set; }
+        public override TargetType TargetType { get; }
+
+        private bool hasQuickTime;
+
         public HashSet<Attributes.Attributes> PossibleEnemyTypes { get; set; } = null;
 
         public override void Execute(Battle.Battle battle, object activeHero, Enemy[] targets, Action<IEnumerable<Tuple<Enemy,bool>>> p)
         {
             
             var mario = activeHero as Hero;
-            var battleAnimationSequence = battle.WaitForBattleAnimationSequence();
-            bool succ = battleAnimationSequence.Sucessful;
+            var succ = false;
+            if (hasQuickTime)
+            {
+                var battleAnimationSequence = battle.WaitForBattleAnimationSequence();
+                succ = battleAnimationSequence.Sucessful;
+            }
+           
             var results = targets.Select(target => {
 
                 bool attWasSuc = mario.Attack(Attack, target, succ);

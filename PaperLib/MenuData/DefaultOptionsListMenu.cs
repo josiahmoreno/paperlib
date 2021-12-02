@@ -46,7 +46,7 @@ namespace MenuData
 
         public void Show(IOption[] options, int? selected = null)
         {
-            Console.WriteLine($"DefaultOptionsListMenu - Show");
+            //Console.WriteLine($"DefaultOptionsListMenu - Show");
             if (options.Length == 0)
             {
                 throw new ArgumentException("needs to have at least some options");

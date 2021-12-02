@@ -18,9 +18,7 @@ namespace Tests
         public void Setup()
         {
             var enemyFactory = new EnemyFactory();
-            battle = new Battle.Battle();
-            battle.Heroes.Add(new Mario(new List<IJumps>() { new PowerJump() }));
-            battle.Enemies.Add(enemyFactory.FetchEnemy<NewBlueGoomba>());
+            battle = new Battle.Battle(new List<Hero>{new Mario(new List<IJumps>() { new PowerJump() })},new List<Enemy> { enemyFactory.FetchEnemy<NewBlueGoomba>() });
         }
 
 

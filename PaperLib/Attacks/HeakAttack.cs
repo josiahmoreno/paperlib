@@ -24,12 +24,12 @@ namespace Attacks
 
         public void Execute(object active, Hero hero, IBattleAnimationSequence battleAnimationSequence, Action p)
         {
-
-            if (battleAnimationSequence.Sucessful)
+            var success = battleAnimationSequence.Sucessful;
+            if (!success)
             {
                 (active as Enemy).Health.Heal(heal);
             }
-            hero.TakeDamage(this,null ,battleAnimationSequence.Sucessful);
+            hero.TakeDamage(this, null, success);
             p?.Invoke();
         }
 

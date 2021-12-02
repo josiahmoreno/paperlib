@@ -14,7 +14,9 @@ namespace MenuData
             { Attacks.Attacks.BaseJump, "Jump" },
             { Attacks.Attacks.Headbonk, "Headbonk" },
             { Attacks.Attacks.BaseHammer, "Hammer" },
-             { Attacks.Attacks.HammerThrow, "Hammer Throw" }
+             { Attacks.Attacks.HammerThrow, "Hammer Throw" }, 
+            { Attacks.Attacks.PowerShell, "Power Shell"}
+        
         };
 
         Dictionary<Moves.MovesList, string> movesDictionary = new Dictionary<Moves.MovesList, string>()
@@ -36,7 +38,16 @@ namespace MenuData
         };
         public string FetchName(Attacks.Attacks identifier)
         {
-            return dictionary[identifier];
+            dictionary.TryGetValue(identifier, out string Name);
+            if (Name == null)
+            {
+                throw new Exception($"Can't find name of {identifier}");
+            }
+            else
+            {
+                return Name;
+            }
+
         }
 
         public string FetchName(Moves.MovesList identifier)

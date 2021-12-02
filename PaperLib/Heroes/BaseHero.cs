@@ -4,6 +4,7 @@ using Battle;
 using Enemies;
 using MenuData;
 using PaperLib.Sequence;
+using System;
 using System.Collections.Generic;
 using Tests;
 
@@ -85,7 +86,8 @@ namespace Heroes
             {
                 Health.TakeDamage(enemyAttack.Power);
 
-            } 
+            }
+            Console.WriteLine($"Ouch! {this.GetType().Name} is now at{this.Health.CurrentValue}");
             return true;
         }
     }

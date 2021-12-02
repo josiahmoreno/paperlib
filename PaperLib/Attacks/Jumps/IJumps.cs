@@ -2,7 +2,8 @@
 
 namespace Heroes
 {
-    public interface IJumps: IAttack
+    public interface IJumps : IAttack
     {
+        int PowerModifier {get;}
     }
 }

@@ -93,25 +93,25 @@ namespace TargetSystem
             {
                 throw new Exception("enemies can't be zero");
             }
-            Console.WriteLine($"TargetSystem - Show {option.Name} {option.TargetType}, enemies.count = {enemies.Count}");
+            //Console.WriteLine($"TargetSystem - Show {option.Name} {option.TargetType}, enemies.count = {enemies.Count}");
             this.currentOption = option;
             if (option.TargetType == TargetType.Single)
             {
                 Actives = new Enemy[1];
                 if (currentOption is AttackOption attackOption)
                 {
-                    Console.WriteLine($"{this.GetType().Name} - {attackOption.Name} {attackOption.Attack}");
+                    //Console.WriteLine($"{this.GetType().Name} - {attackOption.Name} {attackOption.Attack}");
 
                     try
                     {
                         Actives[0] = enemies.First(enemy =>
                         {
                             
-                            Console.WriteLine($"{this.GetType().Name} - {enemy} {(enemy.Attrs == null ? "null" : enemy.Attrs.Length.ToString())}");
+                            //Console.WriteLine($"{this.GetType().Name} - {enemy} {(enemy.Attrs == null ? "null" : enemy.Attrs.Length.ToString())}");
                             return enemy.EnemyType != EnemyType.Enviroment && (enemy.Attrs == null || (enemy.Attrs.Length ==0 || (enemy.Attrs.Length >0 &&
                                    enemy.Attrs.All(attr =>
                                    {
-                                       Console.WriteLine($"{this.GetType().Name} -              {attr}");
+                                       //Console.WriteLine($"{this.GetType().Name} -              {attr}");
                                        return attr.CanAttack(null, attackOption.Attack);
                                    }))));
                         });
@@ -120,7 +120,7 @@ namespace TargetSystem
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine($"{attackOption} {enemies[0]}- {e}");
+                        //Console.WriteLine($"{attackOption} {enemies[0]}- {e}");
                         throw;
                     }
                     
@@ -147,6 +147,20 @@ namespace TargetSystem
         {
             Hide();
             ActiveChanged?.Invoke(Actives);
+        }
+
+        public void Cancel()
+        {
+            //TargetSystem.Hide();
+            //if (ActionMenu.ActiveAction.Options.Count() == 1)
+            //{
+            //    ActionMenu.Show();
+            //    ActivePlayerHud.Show();
+            //}
+            //else
+            //{
+            //    OptionsListMenu.Show(ActionMenu.ActiveAction.Options);
+            //}
         }
     }
  

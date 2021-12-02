@@ -43,6 +43,7 @@ namespace Attributes
         public void TakeDamage(int damage)
         {
             CurrentValue -= damage;
+            
             if(CurrentValue <= 0)
             {
                 CurrentValue = 0;
@@ -58,6 +59,10 @@ namespace Attributes
         public void Heal(int heal)
         {
             CurrentValue += heal;
+            if (CurrentValue >= Max)
+            {
+                CurrentValue = Max;
+            }
         }
 
         public bool Equals(IHealth other)

@@ -16,11 +16,12 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            battle = new Battle.Battle();
-            battle.Heroes.Add(new Mario());
+        
+           
             var enemyFactory = new EnemyFactory();
             ;
-            battle.Enemies.Add(enemyFactory.FetchEnemy<NewBlueGoomba>());
+            battle = new Battle.Battle(new List<Hero> { new Mario() }, new List<Enemy> { enemyFactory.FetchEnemy<NewBlueGoomba>() });
+          
         }
 
         [Test]

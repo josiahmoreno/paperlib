@@ -3,6 +3,8 @@ using System.Linq;
 using Battle;
 using Heroes;
 using Enemies;
+using System.Collections.Generic;
+
 namespace Tests
 {
     public class Mario_attacks_goomba
@@ -12,9 +14,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            battle = new Battle.Battle();
-            battle.Heroes.Add(new Mario());
-            battle.Enemies.Add(new Goomba());
+            battle = new Battle.Battle(new List<Hero> { new Mario() }, new List<Enemy> { new Goomba()});
         }
 
       

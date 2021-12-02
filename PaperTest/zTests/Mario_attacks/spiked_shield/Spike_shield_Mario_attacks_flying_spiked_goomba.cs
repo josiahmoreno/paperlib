@@ -4,6 +4,7 @@ using Battle;
 using Heroes;
 using Enemies;
 using Attributes;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -14,9 +15,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            battle = new Battle.Battle();
-            battle.Heroes.Add(new Mario(new SpikeShield()));
-            battle.Enemies.Add(new Goomba(new Flying(),new Spike()));
+            battle = new Battle.Battle(new List<Hero> { new Mario() }, new List<Enemy> { new Goomba(new Flying() ,new Spike()) });
         }
 
 
@@ -27,8 +26,8 @@ namespace Tests
             IMario mario = battle.Heroes.Find(hero => hero.IsUnique && hero.Identity == Heroes.Heroes.Mario) as IMario;
 
             mario.JumpOn(battle.Enemies.First());
-            var isDead = battle.Enemies.First().IsDead;
-            Assert.IsTrue(isDead);
+            var isAlive = battle.Enemies.First().IsAlive();
+            Assert.IsTrue(isAlive);
         }
 
 

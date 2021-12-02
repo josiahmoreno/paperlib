@@ -31,7 +31,12 @@ namespace PaperLib.Sequence
         public void Start(ISequenceable sequenceable)
         {
             logger?.Log(this+ $" attack = { Attack}, hero {hero}, enemy {target}");
-            bool attWasSuc = hero.Attack(Attack, target, damageTarget.GetQuicktimeResult());
+            var quicktime = damageTarget.GetQuicktimeResult();
+        
+                logger?.Log($"The quicktime is {(quicktime ? "successful":"fail")}!");
+            
+            bool attWasSuc = hero.Attack(Attack, target, quicktime);
+            
             OnComplete?.Invoke(this, EventArgs.Empty);
 
         }

@@ -20,10 +20,10 @@ namespace Battle
         private int count = 0;
         public void ExecuteEnemyTurn(Battle battle, object obj)
         {
-            Console.WriteLine($"1 - TurnChange -  {obj}");
+            //Console.WriteLine($"ExecuteEnemyTurn - TurnChange -  {obj}");
             if (obj is Enemies.Enemy)
             {
-                Console.WriteLine($"DefaultEnemyAiSystem - OnActiveChanged -  {obj}");
+                //Console.WriteLine($"DefaultEnemyAiSystem - OnActiveChanged -  {obj}");
                 var enemy = obj as Enemies.Enemy;
                 var move = enemy.GetRandomMove();
                 battle.EnemyAttack(move);

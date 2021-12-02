@@ -40,7 +40,7 @@ namespace Battle
             return qualifier.Invoke(battle);
         }
 
-        internal void OnCompleted(Action<bool> onBattleEventCompleted)
+        internal void SetOnCompleted(Action<bool> onBattleEventCompleted)
         {
             this.onBattleEventCompleted = onBattleEventCompleted;
         }

@@ -19,12 +19,12 @@ namespace Tests.target_system
         [SetUp]
         public void setup()
         {
-            this.Battle = new Battler();
+           
             var mario = new Mario(jumps: new List<IJumps> { new Jump(), new PowerJump() });
             mario.Sequenceable = new TestSequenceable();
             var goombario = new Goombario();
             goombario.Sequenceable = new TestSequenceable();
-            Battle.Heroes = new List<Hero>(){ mario, goombario };
+          
             var fac = new EnemyFactory();
             var goomba1 = fac.FetchEnemy<NewGoomba>();
             goomba1.Sequenceable = new TestSequenceable();
@@ -32,13 +32,14 @@ namespace Tests.target_system
             goomba2.Sequenceable = new TestSequenceable();
             var goomba3 = fac.FetchEnemy<NewGoomba>();
             goomba3.Sequenceable = new TestSequenceable();
-            Battle.Enemies = new List<Enemy>() { goomba1, goomba2, goomba3 };
+            this.Battle = new Battler(new List<Hero>() { mario, goombario }, new List<Enemy>() { goomba1, goomba2, goomba3 });
             Battle.Start();
         }
 
         [Test]
         public void moveLeftTargetSystemOutOfBounds()
         {
+            
             Assert.True(Battle.ActionMenu.Showing);
             Battle.Execute();
             Assert.True(!Battle.ActionMenu.Showing);
@@ -52,10 +53,12 @@ namespace Tests.target_system
         [Test]
         public void actives_null_after_confirm()
         {
+            Console.WriteLine($"enemies = {Battle.Enemies.Count}, {Battle.TargetSystem.SelectedIndex}");
             Assert.True(Battle.ActionMenu.Showing);
             Battle.Execute();
             Assert.True(!Battle.ActionMenu.Showing);
             Assert.True(Battle.OptionsListMenu.Showing);
+            Console.WriteLine($"enemies = {Battle.Enemies.Count}, {Battle.TargetSystem.SelectedIndex}");
             Battle.Execute();
             Assert.True(Battle.TargetSystem.Showing);
             Console.WriteLine($"enemies = {Battle.Enemies.Count}, {Battle.TargetSystem.SelectedIndex}");
@@ -85,12 +88,11 @@ namespace Tests.target_system
         [Test]
         public void HammerTest()
         {
-            var battler =  new Battler();
+           
             var goomba1 = new Goomba();
             var goomba2 = new Goomba(new Flying());
             var goomba3 = new Goomba(new Flying());
-            battler.Enemies = new List<Enemy>(){goomba1, goomba2, goomba3};
-            battler.Heroes = new List<Hero>() {new Mario()};
+            var battler = new Battler( new List<Hero>() { new Mario() }, new List<Enemy>() { goomba1, goomba2, goomba3 });
             battler.Start();
             battler.TargetSystem.Show(battler.ActionMenu.Items[3].Options[0]);
             var targetSystem = battler.TargetSystem;

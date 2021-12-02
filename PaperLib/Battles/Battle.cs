@@ -13,37 +13,42 @@ namespace Battle
     public class Battle
     {
         public static ILogger Logger;
-        public IBattleStateStore BattleStateStore = new BattleStateStore();
-        public List<Hero> Heroes = new List<Hero>();
-        public List<Enemy> Enemies = new List<Enemy>();
+        public IBattleStateStore StateStore = new BattleStateStore();
+        public List<Hero> Heroes  { get; private set; }
+        public List<Enemy> Enemies { get; private set; }
         public List<BattleEvent> events = new List<BattleEvent>();
-
-        public IMarioHealthCounter HealthCounter;
+        //this is a view
+        public IMarioHealthCounter ActivePlayerHud;
         public ITurnSystem TurnSystem { get; internal set; } = new DefaultTurnSystem(Logger);
+        public List<IMenu> Menus { get; set; }
         public IActionMenu ActionMenu { get; internal set; }
         public IOptionsListMenu OptionsListMenu { get; internal set; } = new DefaultOptionsListMenu();
-
         public IOptionsListMenu SubOptionsListMenu { get; private set; } = new DefaultOptionsListMenu();
+        public string ActiveOptionName { get => actionMenuStore.FetchName(ActiveOption); }
+        public BattleState State { get => StateStore.State; }
+        public ITattleStore TattleStore { get; internal set; } = new TattleStore();
         public static IActionCommandCenter ActionCommandCenter = new TestActionCommandCenter();
-        internal IBattleAnimationSequence WaitForBattleAnimationSequence()
-        {
-            return ActionCommandCenter.FetchSequence();
-        }
-
         public ITargetSystem TargetSystem { get; internal set; }
         public ITextBubbleSystem TextBubbleSystem { get; internal set; }
-
         private IOption ActiveOption;
-
         public IEnemyAISysytem enemyAISysytem { get; internal set; }
+        //public IExecuteable ActiveExecutable { get; private set; }
+
+        private IActionMenuStore actionMenuStore = new DefaultActionMenuStore();
+        //private IHasMoveableTarget ActiveMenu;
+       
 
         public void Load(List<Hero> heroes, List<Enemy> enemies)
         {
+            this.Heroes = heroes;
+            this.Enemies = enemies;
             TurnSystem.Load(heroes, enemies);
+            this.ActivePlayerHud = new MarioHealthCounter(heroes);
             this.TargetSystem = new DefaultTargetSystem(enemies);
         }
 
-        private IActionMenuStore actionMenuStore = new DefaultActionMenuStore();
+
+
         public Battle()
         {
             TurnSystem = new DefaultTurnSystem(Logger);
@@ -59,7 +64,8 @@ namespace Battle
             Heroes = heroes;
             Enemies = enemies;
             TurnSystem = new DefaultTurnSystem(Logger);
-            this.HealthCounter = new MarioHealthCounter(heroes);
+            enemyAISysytem = new DefaultEnemyAiSystem(this, TurnSystem);
+            this.ActivePlayerHud = new MarioHealthCounter(heroes);
             ActionMenu = new DefaultActionMenu(TurnSystem);
             TargetSystem = new DefaultTargetSystem(Enemies);
             TextBubbleSystem = new TextBubbleSystem();
@@ -72,23 +78,19 @@ namespace Battle
             Enemies = enemies;
             TurnSystem = new DefaultTurnSystem(Logger);
             enemyAISysytem = new DefaultEnemyAiSystem(this, TurnSystem);
-            this.HealthCounter = new MarioHealthCounter(heroes);
+            this.ActivePlayerHud = new MarioHealthCounter(heroes);
             ActionMenu = new DefaultActionMenu(TurnSystem);
             TargetSystem = new DefaultTargetSystem(Enemies);
             TextBubbleSystem = bubbleSystem;
             TurnSystem.Load(heroes, enemies);
         }
 
-        public Battle(List<Hero> heroes, List<Enemy> enemies, Encounter encounter) : this(heroes, encounter.ToEnemies())
+
+        public Battle(List<Hero> heroes, EnemyConfig encounter) : this(heroes, encounter.ToEnemies())
         {
 
         }
-
-        public Battle(List<Hero> heroes, Encounter encounter) : this(heroes, encounter.ToEnemies())
-        {
-
-        }
-
+        //maybe have an active system
         public void Cancel()
         {
             if (TargetSystem.Showing)
@@ -97,62 +99,46 @@ namespace Battle
                 if (ActionMenu.ActiveAction.Options.Count() == 1)
                 {
                     ActionMenu.Show();
-                    HealthCounter.Show();
+                    ActivePlayerHud.Show();
                 }
                 else
                 {
                     OptionsListMenu.Show(ActionMenu.ActiveAction.Options);
                 }
-
-                /*
-                 ActionMenu.Hide();
-            OptionsListMenu.Show(ActionMenu.ActiveAction.Options);
-            ActiveOption = OptionsListMenu.Active;
-                 * 
-                    ActiveOption = OptionsListMenu.Active;
-            OptionsListMenu.Hide();
-            TargetSystem.Show(ActiveOption);
-                 
-                 */
             }
             else if (OptionsListMenu.Showing)
             {
                 OptionsListMenu.Hide();
-                ActionMenu.Start();
-                HealthCounter.Show();
+                ActionMenu.OnBattleStarted();
+                ActivePlayerHud.Show();
 
             }
         }
 
-        private void CheckLoaded()
-        {
-            if (this.HealthCounter == null)
-            {
-                this.HealthCounter = new MarioHealthCounter(Heroes);
-            }
 
-            if (TargetSystem == null)
-            {
-                TargetSystem = new DefaultTargetSystem(Enemies);
-            }
-            if (!TurnSystem.IsLoaded)
-            {
-                TurnSystem.Load(Heroes, Enemies);
-
-            }
-        }
+      
         public void Start()
         {
-            CheckLoaded();
-            BattleStateStore.State = BattleState.STARTING;
+           
+            StateStore.State = BattleState.STARTING;
 
             Enemies.ForEach(enemy => enemy.OnKilled += Enemy_OnKilled);
+            //execute battleevent
             events.ForEach(battleEvent =>
             {
                 if (battleEvent.IsAtStart(this) && battleEvent.IsReady(this))
                 {
 
                     battleEvent.Execute(this);
+                    battleEvent.SetOnCompleted((isCompleted) =>
+                    {
+                        CheckIfAllBattleEventsAreCompleted(isCompleted, () =>
+                        {
+                            ActionMenu.OnBattleStarted();
+                            ActivePlayerHud.Show();
+                            StateStore.State = BattleState.STARTED;
+                        });
+                    });
 
                 }
             });
@@ -171,30 +157,24 @@ namespace Battle
                 {
                     if (ev.IsAtStart(this) && !ev.Completed)
                     {
-
-                        ev.OnCompleted((isCompleted) =>
-                        {
-                            OnBattleEventCompleted(isCompleted, () =>
-                            {
-                                ActionMenu.Start();
-                                HealthCounter.Show();
-                                BattleStateStore.State = BattleState.STARTED;
-                            });
-                        });
+                        //executed but not completed
+                       
 
                     }
                 }
             }
             else
             {
-                ActionMenu.Start();
-                HealthCounter.Show();
-                BattleStateStore.State = BattleState.STARTED;
+                //ActiveMenu?.OnBattleStarted();
+                ActionMenu.OnBattleStarted();
+                ActivePlayerHud.Show();
+                StateStore.State = BattleState.STARTED;
+
             }
 
         }
 
-        private void OnBattleEventCompleted(bool isCompleted, Action action)
+        private void CheckIfAllBattleEventsAreCompleted(bool isCompleted, Action action)
         {
             bool allCompleted = true;
             foreach (var ev in events)
@@ -215,13 +195,14 @@ namespace Battle
         {
             if (Enemies.TrueForAll(enemy => enemy.IsDead) && !(TextBubbleSystem != null && TextBubbleSystem.Showing))
             {
-                BattleStateStore.State = BattleState.ENDED;
+                StateStore.State = BattleState.ENDED;
                 Enemies.ForEach(enemy => enemy.OnKilled -= Enemy_OnKilled);
             }
         }
 
         public void MoveTargetDown()
         {
+            //ActiveMenu?.MoveTargetDown();
             if (SubOptionsListMenu.Showing)
             {
                 SubOptionsListMenu.MoveTargetDown();
@@ -240,6 +221,7 @@ namespace Battle
 
         public void MoveTargetUp()
         {
+            //ActiveMenu?.MoveTargetUp();
             if (OptionsListMenu.Showing)
             {
                 OptionsListMenu.MoveTargetUp();
@@ -253,12 +235,12 @@ namespace Battle
 
         public bool IsStarted()
         {
-            return BattleStateStore.IsStarted();
+            return StateStore.IsStarted();
         }
 
         public bool IsEnded()
         {
-            return BattleStateStore.IsEnded() && !(TextBubbleSystem != null && TextBubbleSystem.Showing);
+            return StateStore.IsEnded() && !(TextBubbleSystem != null && TextBubbleSystem.Showing);
         }
 
         public void AddEventOnStart(BattleEvent @event)
@@ -272,21 +254,24 @@ namespace Battle
             events.Add(@event);
         }
 
+        internal IBattleAnimationSequence WaitForBattleAnimationSequence()
+        {
+            return ActionCommandCenter.FetchSequence();
+        }
+
         public void EndTurn()
         {
-            Console.WriteLine($"{GetType().Name} - ExecuteOption - End");
+            //Logger?.Log($"{GetType().Name} - ExecuteOption - End");
             TurnSystem.End();
-
-            //while (TurnSystem.Active is Enemy enemy && !enemy.IsDead && enemy.EnemyType != EnemyType.Enviroment)
-            //{
             TargetSystem.Cleanup();
             if (Enemies.TrueForAll(enemy => enemy.IsDead))
             {
-                BattleStateStore.State = BattleState.ENDED;
+                StateStore.State = BattleState.ENDED;
                 Enemies.ForEach(enemy => enemy.OnKilled -= Enemy_OnKilled);
             }
             ActionMenu.Process();
-            HealthCounter.Show();
+            ActivePlayerHud.Show();
+            //enemyaisystem
             enemyAISysytem.ExecuteEnemyTurn(this, TurnSystem.Active);
             //}
 
@@ -295,24 +280,33 @@ namespace Battle
 
         public void End()
         {
-            BattleStateStore.State = BattleState.ENDED;
+            StateStore.State = BattleState.ENDED;
         }
 
         public void ShowOptionsMenu()
         {
+            //FetchMenu<IActionMenu>().Hide();
+
             ActionMenu.Hide();
             OptionsListMenu.Show(ActionMenu.ActiveAction.Options);
             ActiveOption = OptionsListMenu.Active;
         }
-
+        //TODO: 
+        private T FetchMenu<T>()
+        {
+            return (T) Menus.Find(menu => menu is T);
+        }
         public void Execute()
         {
+            //this.ActiveExecutable?.Execute();
             if(TargetSystem == null)
             {
+                
                 throw new NullReferenceException("targetSystem is nuii");
             }
             if (ActionMenu.Showing)
             {
+                //onActionMenuExecuted
                 ExecuteFromActionMenu();
             }
             else if (SubOptionsListMenu.Showing)
@@ -331,11 +325,11 @@ namespace Battle
             {
                 TextBubbleSystem.Continue();
             }
-
         }
 
         private void ExecuteFromSubOptionMenu()
         {
+            Logger.Log("   ExecuteFromSubOptionMenu");
             ActiveOption = SubOptionsListMenu.Active;
             SubOptionsListMenu.Hide();
             ActiveOption.Execute(this, TurnSystem.Active, null, null);
@@ -345,6 +339,7 @@ namespace Battle
 
         public void ExecuteFromOptionMenu()
         {
+            Logger.Log("   ExecuteFromSubOptionMenu");
             ActiveOption = OptionsListMenu.Active;
             if (OptionsListMenu.Active is ChangeMemberOption memberOptions)
             {
@@ -359,7 +354,7 @@ namespace Battle
         }
         public void ShowTargeting(IOption active)
         {
-            Console.WriteLine($"Battle - ShowTargeting {active}");
+            Logger?.Log($"Battle - ShowTargeting {active}");
             ActiveOption = active;
             OptionsListMenu.Hide();
             TargetSystem.Show(active);
@@ -371,19 +366,20 @@ namespace Battle
             var target = TargetSystem.Actives;
             var activeHero = TurnSystem.Active;
 
-            Console.WriteLine($"ExecuteOption - {move}");
+            //Logger?.Log($"ExecuteOption - {move}");
             TargetSystem.Confirm();
             move.Execute(this, activeHero, target, (justDamaged) =>
              {
+                 //enviroment target
                  if (target[0] is EnvironmentTarget environmentTarget)
                  {
                      environmentTarget.ExecuteEffect(this);
                  }
                  
-
                  events.Where(ev => ev.IsReady(this)).ToList().ForEach(battleEvent => battleEvent.Execute(this));
                  justDamaged?.ToList().ForEach((damaged) =>
                  {
+                     
                      var sequence = damaged.Item1.PostDamagePhase(damaged.Item2);
 
                  });
@@ -397,22 +393,18 @@ namespace Battle
              });
         }
 
-        private void ShouldEndTurn()
-        {
-            events.Where(ev => ev.IsReady(this));
-        }
-
         internal void EnemyAttack(IEnemyAttack move)
         {
             Logger?.Log($"{GetType().Name} - EnemyAttack - {TurnSystem.Active} -  {move} on {Heroes.First()}");
-            //var sequence = ActionCommandCenter.FetchSequence();
-            move.Execute(TurnSystem.Active, Heroes.First(), null, () =>
+            IBattleAnimationSequence sequence = new DelayedSequence(ActionCommandCenter);
+            //IBattleAnimationSequence sequence = null;
+            move.Execute(TurnSystem.Active, Heroes.First(), sequence, () =>
             {
-                Console.WriteLine($"{GetType().Name} - move Execute ");
+                Logger?.Log($"{GetType().Name} - move Execute {TurnSystem.Active}");
                 TurnSystem.End();
                 TurnSystem.ExcuteTurn();
                 ExecuteNextTurn();
-                Console.WriteLine($"EnemyAttack - End");
+                //Logger?.Log($"EnemyAttack - End");
             });
         }
 
@@ -425,11 +417,11 @@ namespace Battle
             TargetSystem.Cleanup();
             if (Enemies.TrueForAll(enemy => enemy.IsDead))
             {
-                BattleStateStore.State = BattleState.ENDED;
+                StateStore.State = BattleState.ENDED;
                 Enemies.ForEach(enemy => enemy.OnKilled -= Enemy_OnKilled);
             }
             ActionMenu.Process();
-            HealthCounter.Show();
+            ActivePlayerHud.Show();
         }
 
         public void ExecuteFromActionMenu()
@@ -445,13 +437,6 @@ namespace Battle
             }
         }
 
-        public string ActiveOptionName { get => actionMenuStore.FetchName(ActiveOption); }
-        public BattleState State { get => BattleStateStore.State; }
-        public ITattleStore TattleStore { get; internal set; } = new TattleStore();
-
-        //public IOption[] PartnersOptions { get; set; } = 
-        //{new PartnerOption("Goombario"), new PartnerOption("Koopa")};
-
         public string GetActiveOptionName()
         {
             return actionMenuStore.FetchName(OptionsListMenu.Active);
@@ -459,7 +444,7 @@ namespace Battle
 
         public void ShowText(GameText gameText)
         {
-            HealthCounter.Hide();
+            ActivePlayerHud.Hide();
             TextBubbleSystem.ShowText(gameText);
         }
 
@@ -467,7 +452,7 @@ namespace Battle
         {
             TextBubbleSystem.OnTextCompleted((result) =>
             {
-                HealthCounter.Show();
+                ActivePlayerHud.Show();
                 action(result);
             });
         }
@@ -486,9 +471,9 @@ namespace Battle
         {
             if (obj is Battle battle)
             {
-                if (!EqualityComparer<IBattleStateStore>.Default.Equals(BattleStateStore, battle.BattleStateStore))
+                if (!EqualityComparer<IBattleStateStore>.Default.Equals(StateStore, battle.StateStore))
                 {
-                    Console.WriteLine($"expected: {BattleStateStore.State}, actual: {battle.BattleStateStore.State}");
+                    Logger?.Log($"expected: {StateStore.State}, actual: {battle.StateStore.State}");
                     return false;
                 }
                 if (!Enumerable.SequenceEqual(Heroes, battle.Heroes))
@@ -507,41 +492,13 @@ namespace Battle
                 {
                     return false;
                 }
-               // if (!EqualityComparer<IActionMenuStore>.Default.Equals(actionMenuStore, battle.actionMenuStore))
-               // {
-                 //   return false;
-               // }
-             //   if (ActiveOptionName != battle.ActiveOptionName)
-               // {
-                 //   return false;
-               // }
                 if (State != battle.State)
                 {
                     return false;
                 }
                 return true;
             }
-            return false;
-            //return obj is Battle battle &&
-            //       EqualityComparer<IBattleStateStore>.Default.Equals(BattleStateStore, battle.BattleStateStore) &&
-            //       EqualityComparer<List<Hero>>.Default.Equals(Heroes, battle.Heroes) &&
-            //       EqualityComparer<List<Enemy>>.Default.Equals(Enemies, battle.Enemies) &&
-            //       EqualityComparer<List<BattleEvent>>.Default.Equals(events, battle.events) &&
-            //       //EqualityComparer<IMarioHealthCounter>.Default.Equals(HealthCounter, battle.HealthCounter) &&
-            //       //EqualityComparer<ITurnSystem>.Default.Equals(TurnSystem, battle.TurnSystem) &&
-            //       //EqualityComparer<IActionMenu>.Default.Equals(ActionMenu, battle.ActionMenu) &&
-            //       //EqualityComparer<IOptionsListMenu>.Default.Equals(OptionsListMenu, battle.OptionsListMenu) &&
-            //       //EqualityComparer<IOptionsListMenu>.Default.Equals(SubOptionsListMenu, battle.SubOptionsListMenu) &&
-            //       // EqualityComparer<IActionCommandCenter>.Default.Equals(ActionCommandCenter, battle.ActionCommandCenter) &&
-            //       //EqualityComparer<ITargetSystem>.Default.Equals(TargetSystem, battle.TargetSystem) &&
-            //       // EqualityComparer<ITextBubbleSystem>.Default.Equals(TextBubbleSystem, battle.TextBubbleSystem) &&
-            //       EqualityComparer<IOption>.Default.Equals(ActiveOption, battle.ActiveOption) &&
-            //       //EqualityComparer<IEnemyAISysytem>.Default.Equals(enemyAISysytem, battle.enemyAISysytem) &&
-            //       EqualityComparer<IActionMenuStore>.Default.Equals(actionMenuStore, battle.actionMenuStore) &&
-            //       ActiveOptionName == battle.ActiveOptionName &&
-
-            //       //EqualityComparer<ITattleStore>.Default.Equals(TattleStore, battle.TattleStore) &&
-            //       State == battle.State;
+            return false;  
         }
     }
 

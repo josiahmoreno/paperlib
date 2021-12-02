@@ -23,8 +23,8 @@ namespace PaperLib.Sequence
 
            
             hero.Wait(new SendOrPostCallback(state =>
-            {
-                logger.Log($"{this} timer ended, - {Thread.CurrentThread.ManagedThreadId} completingggggg...");
+            {  
+                logger.Log($"{this} timer ended, - completingggggg...");
                 OnComplete(this, EventArgs.Empty);
             }), new object());
 

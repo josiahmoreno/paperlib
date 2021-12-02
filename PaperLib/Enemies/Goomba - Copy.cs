@@ -69,10 +69,12 @@ namespace Enemies
                 {
                     successful = true;
                     this.Health.TakeDamage(attack.Power +1 );
+                    //Console.WriteLine($"Ouch! {this.GetType().Name} is now at{this.Health.CurrentValue}");
                 } else
                 {
                     successful = true;
                     this.Health.TakeDamage(attack.Power);
+                    //Console.WriteLine($"Ouch! {this.GetType().Name} is now at{this.Health.CurrentValue}");
                 }
               
             }
@@ -90,6 +92,7 @@ namespace Enemies
                     this.Health.TakeDamage(attack.Power);
                 }
             }
+            Console.WriteLine($"Ouch! {this.GetType().Name} is now at{this.Health.CurrentValue}");
             return successful;
 
         }

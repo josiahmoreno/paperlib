@@ -64,7 +64,7 @@ namespace Battle
 
             Completed.Add(Active);
             var oldActive1 = Active;
-            _logger?.Log($"{GetType().Name} - starting to end turn {oldActive1}");
+            //_logger?.Log($"{GetType().Name} - starting to end turn {oldActive1}");
             bool containsEveryone = Enemies.All(enemy => enemy.EnemyType == EnemyType.Enviroment || Completed.Contains(enemy) || enemy.IsDead);
             bool containsHeroes = Heroes.Where(hero => hero is Hero && hero.Actions.Count() > 0)
                 .All((hero) => Completed.Contains(hero));
@@ -79,7 +79,7 @@ namespace Battle
                 //switching to heroes
                 var oldActive = Active;
 
-                _logger?.Log($"{GetType().Name} ------ switching to heroes {string.Join(",", Heroes.Select(h => h.ToString()).ToArray())}, oldActive = {oldActive}");
+                //_logger?.Log($"{GetType().Name} ------ switching to heroes {string.Join(",", Heroes.Select(h => h.ToString()).ToArray())}, oldActive = {oldActive}");
 
                 if (containsEveryone && containsHeroes)
                 {
@@ -88,15 +88,15 @@ namespace Battle
                     //why did i write this because this will reset the turns to null if the battle is ended
                     oldActive = null;
                 }
-                _logger?.Log($"{GetType().Name} ------ old active {oldActive}");
+                //_logger?.Log($"{GetType().Name} ------ old active {oldActive}");
                 try
                 {
                     var nextTurn = Heroes.First((hero) => hero != oldActive && hero.Actions.Length > 0);
-                    _logger?.Log($"{GetType().Name} ------ next turn will be {nextTurn}, oldActive {oldActive}");
+                    //_logger?.Log($"{GetType().Name} ------ next turn will be {nextTurn}, oldActive {oldActive}");
                     Active = nextTurn;
                     if ((oldActive is Hero) && (Active is Hero) && oldActive != nextTurn)
                     {
-                        _logger?.Log($"{GetType().Name} --- activating swap = {nextTurn} from {oldActive}");
+                        //_logger?.Log($"{GetType().Name} --- activating swap = {nextTurn} from {oldActive}");
                         OnSwapped?.Invoke(this, EventArgs.Empty);
                     }
                 }
@@ -108,7 +108,7 @@ namespace Battle
                
               
             }
-            _logger?.Log($"{GetType().Name} ------  ending turn finished {oldActive1} , new active is now {Active} - END");
+            //_logger?.Log($"{GetType().Name} ------  ending turn finished {oldActive1} , new active is now {Active} - END");
 
         }
 
@@ -118,13 +118,13 @@ namespace Battle
             {
                 throw new Exception("Can't reload a turn system");
             }
-            _logger?.Log($"{GetType().Name} - loading... {heroes.Count} {enemies.Count}");
+            //_logger?.Log($"{GetType().Name} - loading... {heroes.Count} {enemies.Count}");
             if (heroes.Count() == 0 || enemies.Count == 0)
             {
                 throw new Exception("Must have enemies AND heroes with turns");
             }
             this.Heroes = heroes;
-            _logger?.Log($"{GetType().Name} - just loaded {string.Join(",",Heroes.Select(h=> h.ToString()).ToArray())}. enemies {string.Join(",", enemies.Select(h => h.ToString()).ToArray())}");
+            //_logger?.Log($"{GetType().Name} - just loaded {string.Join(",",Heroes.Select(h=> h.ToString()).ToArray())}. enemies {string.Join(",", enemies.Select(h => h.ToString()).ToArray())}");
            
             this.Enemies = enemies;
             Active = heroes.First();
@@ -133,7 +133,7 @@ namespace Battle
 
         public void Swap()
         {
-            _logger?.Log($"{GetType().Name} - - Swap {Heroes.Count()}");
+            //_logger?.Log($"{GetType().Name} - - Swap {Heroes.Count()}");
             if (Active is Hero hero)
             {
 

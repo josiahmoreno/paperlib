@@ -4,5 +4,6 @@
     {
         IBattleAnimationSequence FetchSequence();
         void AddSuccessfulPress();
+        void AddFailedPress();
     }
 }

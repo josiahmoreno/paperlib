@@ -86,6 +86,7 @@ namespace Enemies
                     this.Health.TakeDamage(attack.Power);
                 }
             }
+            Console.WriteLine($"Ouch! {this.GetType().Name} is now at{this.Health.CurrentValue}");
             return successful;
 
         }

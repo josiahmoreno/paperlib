@@ -26,7 +26,9 @@ namespace Tests.battlesequence
 
         public IPositionable CopyPosition()
         {
-            throw new NotImplementedException();
+            return new TestTarget(x, y, z);
+            Console.WriteLine("no position to copy");
+            //throw new NotImplementedException();
         }
 
         public void Jump(IPositionable p, Action p1)
@@ -42,7 +44,7 @@ namespace Tests.battlesequence
 
         public void Wait(SendOrPostCallback sendOrPostCallback, object v)
         {
-            throw new NotImplementedException();
+            sendOrPostCallback.Invoke(null);
         }
     }
 }
