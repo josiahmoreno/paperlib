@@ -18,8 +18,12 @@ namespace PaperLib.Sequence
         public void Start(ISequenceable hero)
         {
             Console.WriteLine($"{this} start {{{Goomba}}}");
-           
-            hero.OnMoveComplete = () => { OnComplete(this, EventArgs.Empty); };
+            hero.Animator.Start(this);
+            hero.OnMoveComplete = () =>
+            {
+                OnComplete(this, EventArgs.Empty);
+                hero.Animator.Complete(this);
+            };
             hero.MoveTo(Goomba);
             
             //throw new System.NotImplementedException();

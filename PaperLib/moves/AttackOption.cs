@@ -54,6 +54,11 @@ namespace MenuData
             p.Invoke(results);
         }
 
+        public override string ToString()
+        {
+            return $"{GetType().Name} - {{{Attack}}}";
+        }
+
         public bool Equals(IOption other)
         {
             return base.Equals(other) && other is AttackOption attackOption && attackOption.Attack == Attack;

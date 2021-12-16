@@ -25,10 +25,12 @@ namespace PaperLib.Sequence
             }
             Logger?.Log($"{this} {Guid.ToString().Substring(0,4)} moving to {{{Goomba}}}");
          
+           
             hero.OnMoveComplete = () =>
             {
                 Logger?.Log($"{this} oncomplete {{{Goomba}}}, Complete == null {OnComplete == null}");
                 IsCompleted = true;
+                //hero.Animator.Complete(this);
                 OnComplete(this, EventArgs.Empty);
             };
             hero.MoveTo(Goomba);

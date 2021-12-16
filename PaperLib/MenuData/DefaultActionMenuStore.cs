@@ -15,7 +15,8 @@ namespace MenuData
             { Attacks.Attacks.Headbonk, "Headbonk" },
             { Attacks.Attacks.BaseHammer, "Hammer" },
              { Attacks.Attacks.HammerThrow, "Hammer Throw" }, 
-            { Attacks.Attacks.PowerShell, "Power Shell"}
+            { Attacks.Attacks.PowerShell, "Power Shell"},
+            { Attacks.Attacks.ShellToss , "Shell Toss"}
         
         };
 

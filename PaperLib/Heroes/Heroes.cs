@@ -4,6 +4,7 @@
     {
         Mario,
         Goombario,
-        Goompa
+        Goompa,
+        Kooper
     }
 }

@@ -18,6 +18,7 @@ namespace Tests.battlesequence
         //}
 
         public Action OnMoveComplete { get; set ; }
+        public Animator Animator { get; set; } = new TestAnimator();
 
         //public IPositionable MovementTarget { get; set; } = new TestTarget(0, 0, 0);
         public float x { get; set; }
@@ -45,6 +46,19 @@ namespace Tests.battlesequence
         public void Wait(SendOrPostCallback sendOrPostCallback, object v)
         {
             sendOrPostCallback.Invoke(null);
+        }
+    }
+
+    internal class TestAnimator : Animator
+    {
+        public void Start(ISequenceStep runToAnimation)
+        {
+            
+        }
+
+        public void Complete(ISequenceStep runToAnimation)
+        {
+            
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Attacks
         JrTroopaJump,
         MagikoopTestAttack1,
         FuzzieSuck,
-        GoombaBonk
+        GoombaBonk,
+        ShellToss
     }
 }

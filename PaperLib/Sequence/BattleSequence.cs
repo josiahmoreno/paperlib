@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using Heroes;
 using MenuData;
 
@@ -51,7 +50,8 @@ namespace PaperLib.Sequence
                         //logger?.Log($"{GetType().Name} - just completed2, {PreAnimations[capturedIndex]}");
                       
                         PreAnimations[capturedIndex].OnComplete -= onCom;
-                        
+                        hero.Animator.Complete(PreAnimations[capturedIndex]);
+                        hero.Animator.Start(PreAnimations[capturedIndex +1 ]);
                         PreAnimations[capturedIndex + 1].Start(hero);
                     }
                     animation.OnComplete += onCom;
@@ -70,27 +70,9 @@ namespace PaperLib.Sequence
 
             }
             enumator.Start(hero);
+            hero.Animator.Start(enumator);
         }
 
         public event EventHandler OnComplete;
-    }
-
-    public interface ISequenceStep
-    {
-        event EventHandler OnComplete;
-
-        void Start(ISequenceable hero);
-    }
-
-    public interface ISequenceable : IPositionable
-    {
-        void Jump(IPositionable p, Action p1);
-        void MoveTo(IPositionable p);
-        void Wait(SendOrPostCallback sendOrPostCallback, object v);
-
-        Action OnMoveComplete { get; set; }
-
-        //IMovementTarget MovementTarget { get; set; }
-       
     }
 }

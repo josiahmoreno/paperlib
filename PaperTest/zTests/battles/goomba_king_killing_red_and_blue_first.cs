@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Attacks;
 using Battle;
@@ -25,7 +26,7 @@ namespace Tests.battles
         [SetUp]
         public void Setup()
         {
-
+            Battler.Logger = new TestLogger();
             var bubbleSystem = new TextBubbleSystem();
             this.mario = new Mario(
                 new Inventory(new Item("Mushroom"), new Item("Fire Flower", 3, TargetType.All), new Item("Mushroom")),

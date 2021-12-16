@@ -6,7 +6,7 @@ namespace Heroes
     {
         public int Power => 1;
 
-        public Attacks.Attacks Identifier => Attacks.Attacks.PowerShell;
+        public Attacks.Attacks Identifier => Attacks.Attacks.ShellToss;
 
         public bool IsGroundOnly()
         {

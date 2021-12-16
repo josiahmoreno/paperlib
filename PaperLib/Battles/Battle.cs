@@ -262,17 +262,25 @@ namespace Battle
         public void EndTurn()
         {
             //Logger?.Log($"{GetType().Name} - ExecuteOption - End");
-            TurnSystem.End();
-            TargetSystem.Cleanup();
+            
+          
             if (Enemies.TrueForAll(enemy => enemy.IsDead))
             {
                 StateStore.State = BattleState.ENDED;
                 Enemies.ForEach(enemy => enemy.OnKilled -= Enemy_OnKilled);
             }
-            ActionMenu.Process();
-            ActivePlayerHud.Show();
-            //enemyaisystem
-            enemyAISysytem.ExecuteEnemyTurn(this, TurnSystem.Active);
+
+            if (State != BattleState.ENDED)
+            {
+
+
+                TurnSystem.End();
+                TargetSystem.Cleanup();
+                ActionMenu.Process();
+                ActivePlayerHud.Show();
+                //enemyaisystem
+                enemyAISysytem.ExecuteEnemyTurn(this, TurnSystem.Active);
+            }
             //}
 
             
@@ -286,7 +294,10 @@ namespace Battle
         public void ShowOptionsMenu()
         {
             //FetchMenu<IActionMenu>().Hide();
-
+            if (ActionMenu.ActiveAction.Options.Length == 0)
+            {
+                Logger?.Log($"Action {{{ActionMenu.ActiveAction.Name}}} needs some options");
+            }
             ActionMenu.Hide();
             OptionsListMenu.Show(ActionMenu.ActiveAction.Options);
             ActiveOption = OptionsListMenu.Active;
@@ -500,6 +511,8 @@ namespace Battle
             }
             return false;  
         }
+
+        
     }
 
     public class PartnerOption : IOption

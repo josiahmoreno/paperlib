@@ -15,6 +15,6 @@ namespace Enemies
            
         }
 
-        public override string Identifier { get ; set ; }
+        public override string Identifier { get; set; } = "Fuzzie";
     }
 }
